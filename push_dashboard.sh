@@ -28,6 +28,9 @@ console.log('✅ 日志已记录',today,now);
 echo "📝 从 data.json 更新 HTML..."
 node update_dashboard.js --data data.json 2>/dev/null
 
+echo "🧠 重建 RAG 知识库..."
+python3 build_knowledge.py 2>/dev/null || python build_knowledge.py 2>/dev/null || echo "⚠️  知识库跳过（需安装 chromadb）"
+
 echo "📤 推送到 GitHub..."
 git add -A
 
