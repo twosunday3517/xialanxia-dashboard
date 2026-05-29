@@ -37,5 +37,23 @@
     { "icon": "💻", "name": "MATLAB/Simulink", "status": "available", "latency": "R2024a", "note": "控制算法仿真" },
     { "icon": "📟", "name": "STM32CubeIDE", "url": "https://www.st.com/en/development-tools/stm32cubeide.html", "status": "available", "latency": "v1.15", "note": "数字电源开发" },
     { "icon": "🔬", "name": "SolidWorks", "status": "unavailable", "latency": "—", "note": "待安装" }
+  ],
+  "logs": [
+    { "date": "2026-06-01", "entries": [
+      { "time": "09:30", "icon": "🌐", "action": "浏览 TI Webench，设计 48V→12V 电源方案", "tag": "网站" },
+      { "time": "11:00", "icon": "🔧", "action": "复刻 OpenDCDC 项目，下载原理图", "tag": "开源" },
+      { "time": "14:30", "icon": "📄", "action": "阅读 GaN DC-DC 论文，笔记已整理", "tag": "论文" },
+      { "time": "16:00", "icon": "🏆", "action": "电赛电源组报名准备，Buck/Boost 仿真", "tag": "比赛" }
+    ]},
+    { "date": "2026-05-31", "entries": [
+      { "time": "10:00", "icon": "📊", "action": "电力电子技术复习：BUCK 变换器原理", "tag": "学业" },
+      { "time": "15:00", "icon": "🌐", "action": "电源网浏览 LLC 谐振变换器文章", "tag": "网站" },
+      { "time": "20:00", "icon": "📄", "action": "PFC 整流器论文阅读，仿真模型搭建", "tag": "论文" }
+    ]},
+    { "date": "2026-05-30", "entries": [
+      { "time": "09:00", "icon": "🔧", "action": "SimpleSMPS 项目分析，UC3843 电路学习", "tag": "开源" },
+      { "time": "14:00", "icon": "🏆", "action": "TI杯电源设计赛规则解读", "tag": "比赛" },
+      { "time": "19:00", "icon": "📊", "action": "自动控制原理：PID 参数整定实验", "tag": "学业" }
+    ]}
   ]
 }

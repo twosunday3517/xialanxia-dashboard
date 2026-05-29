@@ -7,6 +7,24 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 cd "$SCRIPT_DIR" || exit 1
 
+echo "📝 生成今日日志..."
+node -e "
+const fs=require('fs');
+const p='data.json';
+let d=JSON.parse(fs.readFileSync(p,'utf-8'));
+const today=new Date().toISOString().slice(0,10);
+const now=new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit',hour12:false});
+if(!d.logs) d.logs=[];
+const exist=d.logs.find(l=>l.date===today);
+if(!exist){
+  d.logs.unshift({date:today,entries:[]});
+}
+const todayLog=d.logs.find(l=>l.date===today);
+todayLog.entries.push({time:now,icon:'📤',action:'Dashboard 自动更新推送',tag:'系统'});
+fs.writeFileSync(p,JSON.stringify(d,null,2),'utf-8');
+console.log('✅ 日志已记录',today,now);
+"
+
 echo "📝 从 data.json 更新 HTML..."
 node update_dashboard.js --data data.json 2>/dev/null
 

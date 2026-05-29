@@ -22,6 +22,7 @@ const MARKERS = {
   watchlist: ['WATCHLIST_START', 'WATCHLIST_END'],
   memory:    ['MEMORY_START',    'MEMORY_END'],
   api:       ['API_START',       'API_END'],
+  logs:      ['LOGS_START',      'LOGS_END'],
 };
 
 function replaceSection(html, section, content) {
@@ -140,6 +141,22 @@ function renderApi(d) {
   }).join('');
 }
 
+function renderLogs(d) {
+  const logs = d.logs || [];
+  if (!logs.length) return '  <div class="dim" style="padding:12px;text-align:center;">暂无日志</div>\n';
+  return logs.slice(0, 7).map(day => {
+    const entries = (day.entries || []).map(e =>
+      `<div class="dim" style="text-align:right;padding-right:4px;">${e.time}</div><div>${e.icon} ${e.action} <span class="tag active" style="font-size:10px;">${e.tag}</span></div>`
+    ).join('\n      ');
+    return `  <div style="margin-bottom:10px;">
+    <div class="dim" style="font-size:12px;margin-bottom:4px;">📅 ${day.date}</div>
+    <div style="display:grid;grid-template-columns:40px 1fr;gap:4px;font-size:13px;">
+      ${entries}
+    </div>
+  </div>\n`;
+  }).join('');
+}
+
 // ============ 渲染器注册表 ============
 const RENDERERS = {
   stats:     renderStats,
@@ -148,6 +165,7 @@ const RENDERERS = {
   watchlist: renderWatchlist,
   memory:    renderMemory,
   api:       renderApi,
+  logs:      renderLogs,
 };
 
 // ============ 主函数 ============
