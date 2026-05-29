@@ -95,11 +95,15 @@ function renderWatchlist(d) {
     const trigger = w.trigger || w.triggerPrice || 0;
     const dType = w.type || w.direction || '触发';
     const dist = w.distance || 0;
-    const distCls = dist < 0 ? 'red' : 'green';
-    const icon = dist < 0 ? '🔴' : '🟢';
-    const typeMap = { stop_loss: '止损', take_profit: '止盈', breakout: '突破', pullback: '回调', down: '止损', up: '止盈', trigger: '触发' };
+    const distNum = typeof dist === 'number' ? dist : 0;
+    const distCls = distNum < 0 ? 'red' : 'green';
+    const icon = distNum < 0 ? '🔴' : '🟢';
+    const typeMap = { stop_loss: '止损', take_profit: '止盈', breakout: '突破', pullback: '回调', down: '止损', up: '止盈', trigger: '触发', deadline: '截止', competition: '比赛' };
     const dLabel = typeMap[dType] || dType;
-    return `    <tr><td class="mono">${icon} ${ticker}</td><td class="mono">$${Number(price).toFixed(2)}</td><td class="mono dim">$${Number(trigger).toFixed(2)}</td><td>${dLabel}</td><td class="${distCls}">${dist >= 0 ? '+' : ''}${dist.toFixed(1)}%</td></tr>\n`;
+    const distStr = typeof dist === 'number' ? `${dist >= 0 ? '+' : ''}${dist.toFixed(1)}%` : dist;
+    const priceStr = typeof price === 'number' ? `$${price.toFixed(2)}` : price;
+    const triggerStr = typeof trigger === 'number' ? `$${trigger.toFixed(2)}` : trigger;
+    return `    <tr><td class="mono">${icon} ${ticker}</td><td class="mono">${priceStr}</td><td class="mono dim">${triggerStr}</td><td>${dLabel}</td><td class="${distCls}">${distStr}</td></tr>\n`;
   }).join('');
 }
 

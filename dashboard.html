@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>📡 电子信息 Dashboard</title>
+<title>⚡ 电源方向 Dashboard</title>
 <style>
   :root { --bg: #0d0d1a; --panel: #13131f; --green: #2dd4bf; --red: #f87171; --text: #e2e8f0; --dim: #7f8ea3; --yellow: #fbbf24; }
   body { background: var(--bg); color: var(--text); font-family: sans-serif; padding: 20px; max-width: 1000px; margin: 0 auto; }
@@ -21,16 +21,19 @@
   .memory-item:last-child { border-bottom: none; }
   .memory-item .time { font-size: 11px; color: var(--dim); }
   .memory-item .title { font-weight: 600; margin: 2px 0; }
+  .memory-item .tag { font-size: 10px; margin-left: 6px; }
   .status-bar { font-size: 13px; color: var(--dim); margin-bottom: 16px; display: flex; gap: 16px; }
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
 
-<h1>📡 电子信息工程 Dashboard</h1>
+<h1>⚡ 电源方向 Dashboard</h1>
 <div class="status-bar">
   <span>🟢 学习中</span>
   <span>🕐 <span id="clock"></span></span>
-  <span class="dim">更新: <span id="updateTime">2026/5/29 15:37:15</span></span>
+  <span class="dim">更新: <span id="updateTime">2026/5/29 15:43:53</span></span>
 </div>
 
 <!-- ========== 顶部数据 ========== -->
@@ -41,7 +44,7 @@
     <div class="label">💰 总资产</div>
   </div>
   <div class="stat-card">
-    <div class="value green">+128.50%</div>
+    <div class="value green">+132.00%</div>
     <div class="label">📈 总盈亏</div>
   </div>
   <div class="stat-card">
@@ -56,98 +59,94 @@
 
 <!-- ========== 1. 学业概览 ========== -->
 <div class="card">
-  <h2>📊 学业概览</h2>
+  <h2>📊 电源方向学业概览</h2>
   <table>
-    <tr><th>课程</th><th>成绩</th><th>绩点</th><th>学时</th><th>实验</th></tr>
+    <tr><th>课程</th><th>成绩</th><th>绩点</th><th>学时</th><th>类型</th></tr>
     <!-- POSITIONS_START -->
-    <tr><td>📘 模电</td><td>$88</td><td class="green">+4.50%</td><td>48 只</td><td class="dim">$3</td></tr>
-    <tr><td>🔌 数电</td><td>$92</td><td class="green">+7.20%</td><td>44 只</td><td class="dim">$2</td></tr>
-    <tr><td>💻 嵌入式</td><td>$85</td><td class="red">-2.00%</td><td>52 只</td><td class="dim">$4</td></tr>
+    <tr><td>⚡ 电力电子技术</td><td>$86</td><td class="green">+4.20%</td><td>48 只</td><td class="dim">$必修</td></tr>
+    <tr><td>🔧 自动控制原理</td><td>$82</td><td class="green">+2.80%</td><td>56 只</td><td class="dim">$必修</td></tr>
+    <tr><td>📐 开关电源设计</td><td>$90</td><td class="green">+6.50%</td><td>32 只</td><td class="dim">$选修</td></tr>
 <!-- POSITIONS_END -->
   </table>
 </div>
 
-<!-- ========== 2. 实验/项目进度 ========== -->
+<!-- ========== 2. 实用网站推荐 ========== -->
 <div class="card">
-  <h2>📋 实验 · 项目进度</h2>
+  <h2>🌐 实用网站推荐</h2>
   <table>
-    <tr><th>任务</th><th>截止</th><th>状态</th><th>最新进展</th><th>评价</th></tr>
+    <tr><th>网站</th><th>类型</th><th>状态</th><th>说明</th><th>推荐</th></tr>
     <!-- CRON_START -->
-    <tr><td>🔬 模电实验报告</td><td class="mono dim">第12周</td><td><span class="tag active">活跃</span></td><td class="dim">已完成</td><td class="dim">A</td></tr>
-    <tr><td>📟 数电期末项目</td><td class="mono dim">第16周</td><td><span class="tag active">活跃</span></td><td class="dim">进度60%</td><td class="dim">B+</td></tr>
-    <tr><td>🤖 智能车竞赛</td><td class="mono dim">6月</td><td><span class="tag active">活跃</span></td><td class="dim">调PID中</td><td class="dim">—</td></tr>
-    <tr><td>📡 信号处理实验</td><td class="mono dim">第13周</td><td><span class="tag error">Matlab崩溃</span></td><td class="dim">FFT报错</td><td class="dim">待调试</td></tr>
-    <tr><td>⚡ 电路分析作业</td><td class="mono dim">每周三</td><td><span class="tag active">活跃</span></td><td class="dim">已提交</td><td class="dim">A-</td></tr>
-    <tr><td>📝 英语六级</td><td class="mono dim">6月15日</td><td><span class="tag pending">待执行</span></td><td class="dim">倒计时18天</td><td class="dim">冲刺中</td></tr>
+    <tr><td>🌐 TI Power Designer</td><td class="mono dim">工具</td><td><span class="tag active">活跃</span></td><td class="dim">在线仿真</td><td class="dim">推荐</td></tr>
+    <tr><td>📚 电源网 dianyuan.com</td><td class="mono dim">社区</td><td><span class="tag active">活跃</span></td><td class="dim">技术文章</td><td class="dim">推荐</td></tr>
+    <tr><td>🔬 21ic 电源论坛</td><td class="mono dim">论坛</td><td><span class="tag active">活跃</span></td><td class="dim">经验分享</td><td class="dim">推荐</td></tr>
+    <tr><td>📡 Power Electronics News</td><td class="mono dim">资讯</td><td><span class="tag error">需翻墙</span></td><td class="dim">RSS订阅</td><td class="dim">待配置</td></tr>
+    <tr><td>💡 英飞凌电源社区</td><td class="mono dim">方案</td><td><span class="tag active">活跃</span></td><td class="dim">参考设计</td><td class="dim">推荐</td></tr>
+    <tr><td>🧩 面包板电源板块</td><td class="mono dim">问答</td><td><span class="tag pending">待执行</span></td><td class="dim">问题求助</td><td class="dim">偶尔看</td></tr>
 <!-- CRON_END -->
   </table>
 </div>
 
-<!-- ========== 3. 竞赛/证书倒计时 ========== -->
+<!-- ========== 3. 优秀电源开源项目 ========== -->
 <div class="card">
-  <h2>⚠️ 竞赛 · 证书倒计时</h2>
+  <h2>🔧 优秀电源开源项目推荐</h2>
   <table>
-    <tr><th>目标</th><th>日期</th><th>类型</th><th>倒计时</th></tr>
+    <tr><th>项目</th><th>平台</th><th>方向</th><th>难度</th><th>推荐理由</th></tr>
     <!-- WATCHLIST_START -->
-    <tr><td class="mono">🔴 🏆 电赛</td><td class="mono">$6.15</td><td class="mono dim">$6.10</td><td>deadline</td><td class="red">-5.2%</td></tr>
-    <tr><td class="mono">🔴 📖 六级</td><td class="mono">$6.15</td><td class="mono dim">$6.10</td><td>deadline</td><td class="red">-18.3%</td></tr>
-    <tr><td class="mono">🟢 🎯 考研</td><td class="mono">$12.21</td><td class="mono dim">$12.20</td><td>deadline</td><td class="green">+201.0%</td></tr>
-    <tr><td class="mono">🔴 💼 实习投递</td><td class="mono">$5.30</td><td class="mono dim">$5.15</td><td>deadline</td><td class="red">-15.0%</td></tr>
+    <tr><td class="mono">🟢 🏆 电赛（电源组）</td><td class="mono">8月</td><td class="mono dim">7月</td><td>报名</td><td class="green">+60天</td></tr>
+    <tr><td class="mono">🟢 🏆 TI杯电源设计赛</td><td class="mono">9月</td><td class="mono dim">8月</td><td>报名</td><td class="green">+90天</td></tr>
+    <tr><td class="mono">🟢 🏆 中国电源学会竞赛</td><td class="mono">10月</td><td class="mono dim">9月</td><td>提交</td><td class="green">+120天</td></tr>
+    <tr><td class="mono">🟢 🏆 集成电路双创赛</td><td class="mono">7月</td><td class="mono dim">6月</td><td>报名</td><td class="green">+30天</td></tr>
 <!-- WATCHLIST_END -->
   </table>
 </div>
 
-<!-- ========== 4. 知识库快照 ========== -->
+<!-- ========== 4. 比赛推送 ========== -->
 <div class="card">
-  <h2>🧠 学习笔记快照</h2>
+  <h2>🏆 比赛推送 · 含报名时间</h2>
+  <table>
+    <tr><th>比赛</th><th>时间</th><th>报名截止</th><th>状态</th><th>准备</th></tr>
+    <!-- 这里没有注释标记，因为比赛数据也用 MEMORY 风格展示 -->
+    <tr><td>🏆 电赛（电源组）</td><td>8月</td><td>7月</td><td><span class="tag pending">+60天</span></td><td class="dim">Buck/Boost 拓扑准备</td></tr>
+    <tr><td>🏆 TI杯电源设计赛</td><td>9月</td><td>8月</td><td><span class="tag pending">+90天</span></td><td class="dim">TI 芯片方案选型</td></tr>
+    <tr><td>🏆 中国电源学会竞赛</td><td>10月</td><td>9月</td><td><span class="tag active">+120天</span></td><td class="dim">论文方向准备</td></tr>
+    <tr><td>🏆 集成电路双创赛</td><td>7月</td><td>6月</td><td><span class="tag error">+30天⚠️</span></td><td class="dim red">尽快报名!</td></tr>
+  </table>
+</div>
+
+<!-- ========== 5. 论文专题 ========== -->
+<div class="card">
+  <h2>📄 论文专题 · 可接受 & 可复刻</h2>
   <!-- MEMORY_START -->
   <div class="memory-item">
-    <div class="time">2026-05-28</div>
-    <div class="title">🔬 模电实验：负反馈放大电路</div>
-    <div class="summary">电压增益 46dB，通频带 20Hz~200kHz，与理论值误差 <3%</div>
+    <div class="time">2026-06</div>
+    <div class="title">📄 GaN 基高频DC-DC变换器综述</div>
+    <div class="summary">Review of GaN-based high-frequency DC-DC converters. 可复刻：48V→12V 降压，开关频率 >1MHz</div>
   </div>
   <div class="memory-item">
-    <div class="time">2026-05-26</div>
-    <div class="title">📟 数电：时序逻辑电路设计</div>
-    <div class="summary">用 74LS161 实现了 12 进制计数器，仿真通过</div>
+    <div class="time">2026-06</div>
+    <div class="title">📄 数字控制 LLC 谐振变换器</div>
+    <div class="summary">Digital control of LLC resonant converter. 可复刻：STM32F334 数字控制，400V→48V</div>
   </div>
   <div class="memory-item">
-    <div class="time">2026-05-24</div>
-    <div class="title">🤖 智能车：PID 参数整定</div>
-    <div class="summary">P=0.8, I=0.02, D=0.1，循迹稳定，弯道速度 1.2m/s</div>
+    <div class="time">2026-05</div>
+    <div class="title">📄 宽禁带器件驱动电路设计</div>
+    <div class="summary">Gate drive circuit design for wide-bandgap devices. 可复刻：SiC MOSFET 驱动，隔离电源</div>
   </div>
   <div class="memory-item">
-    <div class="time">2026-05-22</div>
-    <div class="title">📡 信号处理：FFT 频谱分析</div>
-    <div class="summary">1kHz+3kHz 混叠信号分离成功，频谱分辨率 1Hz</div>
+    <div class="time">2026-05</div>
+    <div class="title">📄 双向 DC-DC 在储能中的应用</div>
+    <div class="summary">Bidirectional DC-DC for energy storage. 可复刻：Buck-Boost 拓扑，数字PID控制</div>
   </div>
   <div class="memory-item">
-    <div class="time">2026-05-20</div>
-    <div class="title">⚡ 电路分析：RLC 谐振电路</div>
-    <div class="summary">谐振频率 f₀=1.59kHz，Q=32，3dB带宽 50Hz</div>
+    <div class="time">2026-04</div>
+    <div class="title">📄 高效率 PFC 整流器设计</div>
+    <div class="summary">High-efficiency PFC rectifier design. 可复刻：Boost PFC，UC3854 控制，300W</div>
   </div>
 <!-- MEMORY_END -->
 </div>
 
-<!-- ========== 5. 开发环境状态 ========== -->
-<div class="card">
-  <h2>💻 开发环境 · 工具链</h2>
-  <table>
-    <tr><th>工具</th><th>状态</th><th>版本</th><th>备注</th></tr>
-    <!-- API_START -->
-    <tr><td>💻 MATLAB</td><td><span class="tag active">可用</span></td><td class="mono dim">激活ms</td><td class="dim">R2024a</td></tr>
-    <tr><td>🔧 Keil MDK</td><td><span class="tag active">可用</span></td><td class="mono dim">v5.38ms</td><td class="dim">STM32F1</td></tr>
-    <tr><td>📐 Altium Designer</td><td><span class="tag active">可用</span></td><td class="mono dim">v22ms</td><td class="dim">学生授权</td></tr>
-    <tr><td>🧩 Vivado</td><td><span class="tag pending">需更新许可证</span></td><td class="mono dim">v2023.2ms</td><td class="dim">需更新许可证</td></tr>
-    <tr><td>🐍 Python</td><td><span class="tag active">可用</span></td><td class="mono dim">3.11ms</td><td class="dim">NumPy/SciPy</td></tr>
-    <tr><td>⚡ STM32CubeMX</td><td><span class="tag active">可用</span></td><td class="mono dim">v6.9ms</td><td class="dim">HAL库</td></tr>
-    <tr><td>📟 Multisim</td><td><span class="tag error">不可用</span></td><td class="mono dim">—ms</td><td class="dim">需重新安装</td></tr>
-<!-- API_END -->
-  </table>
-</div>
-
 <p class="dim" style="text-align:center;font-size:12px;margin-top:24px;">
-  📡 电子信息工程 Dashboard · 由 update_dashboard.js 自动更新
+  ⚡ 电源方向 Dashboard · 数据由 update_dashboard.js 自动更新
 </p>
 
 <script>

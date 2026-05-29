@@ -1,41 +1,41 @@
 {
   "portfolio": {
     "total": 3.72,
-    "totalPnl": 128.5,
+    "totalPnl": 132,
     "accounts": [
-      { "name": "📘 模电",   "value": 88, "pnl": 4.5,  "holdings": 48, "cash": 3 },
-      { "name": "🔌 数电", "value": 92, "pnl": 7.2, "holdings": 44, "cash": 2 },
-      { "name": "💻 嵌入式", "value": 85, "pnl": -2.0, "holdings": 52, "cash": 4 }
+      { "name": "⚡ 电力电子技术",   "value": 86, "pnl": 4.2,  "holdings": 48, "cash": "必修" },
+      { "name": "🔧 自动控制原理", "value": 82, "pnl": 2.8, "holdings": 56, "cash": "必修" },
+      { "name": "📐 开关电源设计", "value": 90, "pnl": 6.5, "holdings": 32, "cash": "选修" }
     ]
   },
   "cronTasks": [
-    { "name": "🔬 模电实验报告",      "cron": "第12周",   "status": "active",  "lastRun": "已完成", "cost": "A" },
-    { "name": "📟 数电期末项目",  "cron": "第16周",  "status": "active",  "lastRun": "进度60%", "cost": "B+" },
-    { "name": "🤖 智能车竞赛",      "cron": "6月",  "status": "active",  "lastRun": "调PID中", "cost": "—" },
-    { "name": "📡 信号处理实验",      "cron": "第13周",   "status": "error",   "lastRun": "FFT报错", "cost": "待调试", "error": "Matlab崩溃" },
-    { "name": "⚡ 电路分析作业",      "cron": "每周三", "status": "active",  "lastRun": "已提交", "cost": "A-" },
-    { "name": "📝 英语六级",      "cron": "6月15日", "status": "pending","lastRun": "倒计时18天", "cost": "冲刺中" }
+    { "name": "🌐 TI Power Designer",      "cron": "工具",   "status": "active",  "lastRun": "在线仿真", "cost": "推荐" },
+    { "name": "📚 电源网 dianyuan.com",  "cron": "社区",  "status": "active",  "lastRun": "技术文章", "cost": "推荐" },
+    { "name": "🔬 21ic 电源论坛",      "cron": "论坛",  "status": "active",  "lastRun": "经验分享", "cost": "推荐" },
+    { "name": "📡 Power Electronics News",      "cron": "资讯",   "status": "error",   "lastRun": "RSS订阅", "cost": "待配置", "error": "需翻墙" },
+    { "name": "💡 英飞凌电源社区",      "cron": "方案", "status": "active",  "lastRun": "参考设计", "cost": "推荐" },
+    { "name": "🧩 面包板电源板块",      "cron": "问答", "status": "pending","lastRun": "问题求助", "cost": "偶尔看" }
   ],
   "watchlist": [
-    { "ticker": "🏆 电赛", "price": 6.15,  "trigger": 6.10,  "type": "deadline",  "distance": -5.2 },
-    { "ticker": "📖 六级", "price": 6.15,  "trigger": 6.10,  "type": "deadline",  "distance": -18.3 },
-    { "ticker": "🎯 考研", "price": 12.21, "trigger": 12.20, "type": "deadline", "distance": 201.0 },
-    { "ticker": "💼 实习投递", "price": 5.30, "trigger": 5.15, "type": "deadline", "distance": -15.0 }
+    { "ticker": "🏆 电赛（电源组）", "price": "8月",  "trigger": "7月",  "type": "报名",  "distance": "+60天" },
+    { "ticker": "🏆 TI杯电源设计赛", "price": "9月",  "trigger": "8月",  "type": "报名",  "distance": "+90天" },
+    { "ticker": "🏆 中国电源学会竞赛", "price": "10月", "trigger": "9月", "type": "提交", "distance": "+120天" },
+    { "ticker": "🏆 集成电路双创赛", "price": "7月", "trigger": "6月", "type": "报名", "distance": "+30天" }
   ],
   "memories": [
-    { "time": "2026-05-28", "title": "🔬 模电实验：负反馈放大电路",      "summary": "电压增益 46dB，通频带 20Hz~200kHz，与理论值误差 <3%" },
-    { "time": "2026-05-26", "title": "📟 数电：时序逻辑电路设计", "summary": "用 74LS161 实现了 12 进制计数器，仿真通过" },
-    { "time": "2026-05-24", "title": "🤖 智能车：PID 参数整定", "summary": "P=0.8, I=0.02, D=0.1，循迹稳定，弯道速度 1.2m/s" },
-    { "time": "2026-05-22", "title": "📡 信号处理：FFT 频谱分析",        "summary": "1kHz+3kHz 混叠信号分离成功，频谱分辨率 1Hz" },
-    { "time": "2026-05-20", "title": "⚡ 电路分析：RLC 谐振电路",          "summary": "谐振频率 f₀=1.59kHz，Q=32，3dB带宽 50Hz" }
+    { "time": "2026-06", "title": "📄 GaN 基高频DC-DC变换器综述",      "summary": "Review of GaN-based high-frequency DC-DC converters. 可复刻：48V→12V 降压，开关频率 >1MHz" },
+    { "time": "2026-06", "title": "📄 数字控制 LLC 谐振变换器", "summary": "Digital control of LLC resonant converter. 可复刻：STM32F334 数字控制，400V→48V" },
+    { "time": "2026-05", "title": "📄 宽禁带器件驱动电路设计", "summary": "Gate drive circuit design for wide-bandgap devices. 可复刻：SiC MOSFET 驱动，隔离电源" },
+    { "time": "2026-05", "title": "📄 双向 DC-DC 在储能中的应用",        "summary": "Bidirectional DC-DC for energy storage. 可复刻：Buck-Boost 拓扑，数字PID控制" },
+    { "time": "2026-04", "title": "📄 高效率 PFC 整流器设计",          "summary": "High-efficiency PFC rectifier design. 可复刻：Boost PFC，UC3854 控制，300W" }
   ],
   "apis": [
-    { "icon": "💻", "name": "MATLAB",     "status": "available",  "latency": "激活", "note": "R2024a" },
-    { "icon": "🔧", "name": "Keil MDK",  "status": "available", "latency": "v5.38", "note": "STM32F1" },
-    { "icon": "📐", "name": "Altium Designer", "status": "available",  "latency": "v22", "note": "学生授权" },
-    { "icon": "🧩", "name": "Vivado",     "status": "limited",  "latency": "v2023.2", "note": "需更新许可证" },
-    { "icon": "🐍", "name": "Python",  "status": "available",  "latency": "3.11", "note": "NumPy/SciPy" },
-    { "icon": "⚡", "name": "STM32CubeMX",  "status": "available",  "latency": "v6.9", "note": "HAL库" },
-    { "icon": "📟", "name": "Multisim",    "status": "unavailable", "latency": "—", "note": "需重新安装" }
+    { "icon": "⚡", "name": "TI Webench",     "status": "available",  "latency": "在线", "note": "电源仿真设计" },
+    { "icon": "🔧", "name": "LTspice",  "status": "available", "latency": "v24", "note": "开关电源仿真" },
+    { "icon": "📐", "name": "Altium Designer", "status": "available",  "latency": "v22", "note": "PCB设计" },
+    { "icon": "🧩", "name": "Simplis",     "status": "limited",  "latency": "试用版", "note": "环路仿真" },
+    { "icon": "💻", "name": "MATLAB/Simulink",  "status": "available",  "latency": "R2024a", "note": "控制算法仿真" },
+    { "icon": "📟", "name": "STM32CubeIDE",  "status": "available",  "latency": "v1.15", "note": "数字电源开发" },
+    { "icon": "🔬", "name": "CAD",    "status": "unavailable", "latency": "—", "note": "待安装 SolidWorks" }
   ]
 }
