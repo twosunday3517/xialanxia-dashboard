@@ -81,7 +81,7 @@ function renderCron(d) {
     if (t.status === 'active') tag = '<span class="tag active">活跃</span>';
     else if (t.status === 'error') tag = `<span class="tag error">${t.error || '错误'}</span>`;
     else tag = '<span class="tag pending">待执行</span>';
-    const costStr = `$${(t.cost || 0).toFixed(3)}`;
+    const costStr = typeof t.cost === 'number' ? `$${t.cost.toFixed(3)}` : (t.cost || '—');
     return `    <tr><td>${t.name}</td><td class="mono dim">${t.cron}</td><td>${tag}</td><td class="dim">${t.lastRun}</td><td class="dim">${costStr}</td></tr>\n`;
   }).join('');
 }
