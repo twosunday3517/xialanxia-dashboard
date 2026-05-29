@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>⚡ 电源方向 Dashboard</title>
 <style>
-  :root { --bg: #0d0d1a; --panel: #13131f; --green: #2dd4bf; --red: #f87171; --text: #e2e8f0; --dim: #7f8ea3; --yellow: #fbbf24; }
+  :root { --bg: #0d0d1a; --panel: #13131f; --green: #2dd4bf; --red: #f87171; --text: #e2e8f0; --dim: #7f8ea3; --yellow: #fbbf24; --blue: #60a5fa; }
   body { background: var(--bg); color: var(--text); font-family: sans-serif; padding: 20px; max-width: 1000px; margin: 0 auto; }
   .card { background: var(--panel); border-radius: 8px; padding: 16px; margin: 12px 0; }
   .card h2 { font-size: 16px; margin-bottom: 10px; }
@@ -17,14 +17,37 @@
   .tag.error  { background: rgba(248,113,113,.15); color: var(--red); }
   .tag.pending { background: rgba(251,191,36,.15); color: var(--yellow); }
   .mono { font-family: monospace; }
-  .memory-item { padding: 8px 0; border-bottom: 1px solid #1e1e33; font-size: 13px; }
-  .memory-item:last-child { border-bottom: none; }
-  .memory-item .time { font-size: 11px; color: var(--dim); }
-  .memory-item .title { font-weight: 600; margin: 2px 0; }
-  .memory-item .tag { font-size: 10px; margin-left: 6px; }
-  .status-bar { font-size: 13px; color: var(--dim); margin-bottom: 16px; display: flex; gap: 16px; }
   a { color: var(--green); text-decoration: none; }
   a:hover { text-decoration: underline; }
+  .status-bar { font-size: 13px; color: var(--dim); margin-bottom: 16px; display: flex; gap: 16px; }
+
+  /* 日志 Tab 标签 */
+  .log-tabs { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+  .log-tab {
+    padding: 4px 14px; border-radius: 14px; font-size: 12px; cursor: pointer;
+    background: rgba(255,255,255,.05); color: var(--dim); border: 1px solid transparent;
+    transition: .2s;
+  }
+  .log-tab:hover { border-color: var(--dim); }
+  .log-tab.on { background: rgba(45,212,191,.12); color: var(--green); border-color: var(--green); }
+
+  /* 日志条目 */
+  .log-day { margin-bottom: 14px; }
+  .log-day .day-head { font-size: 12px; color: var(--dim); margin-bottom: 6px; font-weight: 600; }
+  .log-row { display: grid; grid-template-columns: 42px 1fr; gap: 4px; font-size: 13px; padding: 3px 0; }
+  .log-row .ltime { text-align: right; padding-right: 6px; color: var(--dim); font-size: 11px; }
+  .log-row .ltext { color: var(--text); }
+
+  /* 每日总结 */
+  .daily-summary {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 6px; margin-bottom: 16px;
+  }
+  .daily-summary .sum-item {
+    background: var(--bg); border-radius: 6px; padding: 8px 10px; text-align: center;
+    font-size: 12px;
+  }
+  .sum-item .count { font-size: 18px; font-weight: 700; }
 </style>
 </head>
 <body>
@@ -33,28 +56,7 @@
 <div class="status-bar">
   <span>🟢 学习中</span>
   <span>🕐 <span id="clock"></span></span>
-  <span class="dim">更新: <span id="updateTime">2026/5/29 15:55:10</span></span>
-</div>
-
-<!-- ========== 顶部数据 ========== -->
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:12px;">
-  <!-- STATS_START -->
-  <div class="stat-card">
-    <div class="value blue">$3.72</div>
-    <div class="label">💰 总资产</div>
-  </div>
-  <div class="stat-card">
-    <div class="value green">+132.00%</div>
-    <div class="label">📈 总盈亏</div>
-  </div>
-  <div class="stat-card">
-    <div class="value" style="color:var(--green)">4/6</div>
-    <div class="label">✅ 任务正常</div>
-  </div>
-  <div class="stat-card">
-    <div class="value yellow">4</div>
-    <div class="label">🔍 预警信号</div>
-  </div><!-- STATS_END -->
+  <span class="dim">更新: <span id="updateTime">2026/5/29 15:59:37</span></span>
 </div>
 
 <!-- ========== 1. 学业概览 ========== -->
@@ -70,35 +72,47 @@
   </table>
 </div>
 
-<!-- ========== 2. 每日日志 ========== -->
+<!-- ========== 2. 每日日志（主入口） ========== -->
 <div class="card">
-  <h2>📜 每日日志 <span class="dim" style="font-weight:400;font-size:12px;">今天做了什么</span></h2>
+  <h2>📜 每日日志 <span class="dim" style="font-weight:400;font-size:12px;">打开即看今天做了什么</span></h2>
+
+  <!-- 今日统计 -->
+  <div class="daily-summary" id="todaySummary">
+    <!-- 由 JS 动态生成 -->
+  </div>
+
+  <!-- 分类 Tab -->
+  <div class="log-tabs" id="logTabs">
+    <span class="log-tab on" data-cat="全部">📋 全部</span>
+    <span class="log-tab" data-cat="学业">📊 学业</span>
+    <span class="log-tab" data-cat="网站">🌐 网站</span>
+    <span class="log-tab" data-cat="开源">🔧 开源</span>
+    <span class="log-tab" data-cat="比赛">🏆 比赛</span>
+    <span class="log-tab" data-cat="论文">📄 论文</span>
+    <span class="log-tab" data-cat="系统">📤 系统</span>
+  </div>
+
+  <!-- 日志内容 -->
   <div id="logContainer">
   <!-- LOGS_START -->
-  <div style="margin-bottom:10px;">
-    <div class="dim" style="font-size:12px;margin-bottom:4px;">📅 2026-06-01</div>
-    <div style="display:grid;grid-template-columns:40px 1fr;gap:4px;font-size:13px;">
-      <div class="dim" style="text-align:right;padding-right:4px;">09:30</div><div>🌐 浏览 TI Webench，设计 48V→12V 电源方案 <span class="tag active" style="font-size:10px;">网站</span></div>
-      <div class="dim" style="text-align:right;padding-right:4px;">11:00</div><div>🔧 复刻 OpenDCDC 项目，下载原理图 <span class="tag active" style="font-size:10px;">开源</span></div>
-      <div class="dim" style="text-align:right;padding-right:4px;">14:30</div><div>📄 阅读 GaN DC-DC 论文，笔记已整理 <span class="tag active" style="font-size:10px;">论文</span></div>
-      <div class="dim" style="text-align:right;padding-right:4px;">16:00</div><div>🏆 电赛电源组报名准备，Buck/Boost 仿真 <span class="tag active" style="font-size:10px;">比赛</span></div>
-    </div>
+  <div class="log-day">
+    <div class="day-head">📅 2026-06-01</div>
+    <div class="log-row"><span class="ltime">09:30</span><span class="ltext">🌐 浏览 TI Webench，设计 48V→12V 电源方案 <span class="tag active" style="font-size:10px;">网站</span></span></div>
+      <div class="log-row"><span class="ltime">11:00</span><span class="ltext">🔧 复刻 OpenDCDC 项目，下载原理图 <span class="tag active" style="font-size:10px;">开源</span></span></div>
+      <div class="log-row"><span class="ltime">14:30</span><span class="ltext">📄 阅读 GaN DC-DC 论文，笔记已整理 <span class="tag active" style="font-size:10px;">论文</span></span></div>
+      <div class="log-row"><span class="ltime">16:00</span><span class="ltext">🏆 电赛电源组报名准备，Buck/Boost 仿真 <span class="tag active" style="font-size:10px;">比赛</span></span></div>
   </div>
-  <div style="margin-bottom:10px;">
-    <div class="dim" style="font-size:12px;margin-bottom:4px;">📅 2026-05-31</div>
-    <div style="display:grid;grid-template-columns:40px 1fr;gap:4px;font-size:13px;">
-      <div class="dim" style="text-align:right;padding-right:4px;">10:00</div><div>📊 电力电子技术复习：BUCK 变换器原理 <span class="tag active" style="font-size:10px;">学业</span></div>
-      <div class="dim" style="text-align:right;padding-right:4px;">15:00</div><div>🌐 电源网浏览 LLC 谐振变换器文章 <span class="tag active" style="font-size:10px;">网站</span></div>
-      <div class="dim" style="text-align:right;padding-right:4px;">20:00</div><div>📄 PFC 整流器论文阅读，仿真模型搭建 <span class="tag active" style="font-size:10px;">论文</span></div>
-    </div>
+  <div class="log-day">
+    <div class="day-head">📅 2026-05-31</div>
+    <div class="log-row"><span class="ltime">10:00</span><span class="ltext">📊 电力电子技术复习：BUCK 变换器原理 <span class="tag active" style="font-size:10px;">学业</span></span></div>
+      <div class="log-row"><span class="ltime">15:00</span><span class="ltext">🌐 电源网浏览 LLC 谐振变换器文章 <span class="tag active" style="font-size:10px;">网站</span></span></div>
+      <div class="log-row"><span class="ltime">20:00</span><span class="ltext">📄 PFC 整流器论文阅读，仿真模型搭建 <span class="tag active" style="font-size:10px;">论文</span></span></div>
   </div>
-  <div style="margin-bottom:10px;">
-    <div class="dim" style="font-size:12px;margin-bottom:4px;">📅 2026-05-30</div>
-    <div style="display:grid;grid-template-columns:40px 1fr;gap:4px;font-size:13px;">
-      <div class="dim" style="text-align:right;padding-right:4px;">09:00</div><div>🔧 SimpleSMPS 项目分析，UC3843 电路学习 <span class="tag active" style="font-size:10px;">开源</span></div>
-      <div class="dim" style="text-align:right;padding-right:4px;">14:00</div><div>🏆 TI杯电源设计赛规则解读 <span class="tag active" style="font-size:10px;">比赛</span></div>
-      <div class="dim" style="text-align:right;padding-right:4px;">19:00</div><div>📊 自动控制原理：PID 参数整定实验 <span class="tag active" style="font-size:10px;">学业</span></div>
-    </div>
+  <div class="log-day">
+    <div class="day-head">📅 2026-05-30</div>
+    <div class="log-row"><span class="ltime">09:00</span><span class="ltext">🔧 SimpleSMPS 项目分析，UC3843 电路学习 <span class="tag active" style="font-size:10px;">开源</span></span></div>
+      <div class="log-row"><span class="ltime">14:00</span><span class="ltext">🏆 TI杯电源设计赛规则解读 <span class="tag active" style="font-size:10px;">比赛</span></span></div>
+      <div class="log-row"><span class="ltime">19:00</span><span class="ltext">📊 自动控制原理：PID 参数整定实验 <span class="tag active" style="font-size:10px;">学业</span></span></div>
   </div>
 <!-- LOGS_END -->
   </div>
@@ -120,11 +134,11 @@
   </table>
 </div>
 
-<!-- ========== 3. 优秀电源开源项目 ========== -->
+<!-- ========== 4. 开源项目 ========== -->
 <div class="card">
   <h2>🔧 优秀电源开源项目推荐</h2>
   <table>
-    <tr><th>项目</th><th>平台</th><th>方向</th><th>难度</th><th>推荐理由</th></tr>
+    <tr><th>项目</th><th>特性</th><th>方向</th><th>难度</th><th>推荐理由</th></tr>
     <!-- WATCHLIST_START -->
     <tr><td class="mono">🟢 <a href="https://github.com/search?q=open+dcdc+converter" target="_blank">OpenDCDC</a></td><td class="mono">48V→12V</td><td class="mono dim">隔离DC-DC</td><td>开源项目</td><td class="green">⭐⭐</td></tr>
     <tr><td class="mono">🟢 <a href="https://github.com/search?q=simple+smps+uc3843" target="_blank">SimpleSMPS</a></td><td class="mono">UC3843方案</td><td class="mono dim">开关电源</td><td>开源项目</td><td class="green">⭐⭐</td></tr>
@@ -134,12 +148,11 @@
   </table>
 </div>
 
-<!-- ========== 4. 比赛推送 ========== -->
+<!-- ========== 5. 比赛推送 ========== -->
 <div class="card">
   <h2>🏆 比赛推送 · 含报名时间</h2>
   <table>
     <tr><th>比赛</th><th>时间</th><th>报名截止</th><th>状态</th><th>准备</th></tr>
-    <!-- 这里没有注释标记，因为比赛数据也用 MEMORY 风格展示 -->
     <tr><td>🏆 电赛（电源组）</td><td>8月</td><td>7月</td><td><span class="tag pending">+60天</span></td><td class="dim">Buck/Boost 拓扑准备</td></tr>
     <tr><td>🏆 TI杯电源设计赛</td><td>9月</td><td>8月</td><td><span class="tag pending">+90天</span></td><td class="dim">TI 芯片方案选型</td></tr>
     <tr><td>🏆 中国电源学会竞赛</td><td>10月</td><td>9月</td><td><span class="tag active">+120天</span></td><td class="dim">论文方向准备</td></tr>
@@ -147,7 +160,7 @@
   </table>
 </div>
 
-<!-- ========== 5. 论文专题 ========== -->
+<!-- ========== 6. 论文专题 ========== -->
 <div class="card">
   <h2>📄 论文专题 · 可接受 & 可复刻</h2>
   <!-- MEMORY_START -->
@@ -179,23 +192,6 @@
 <!-- MEMORY_END -->
 </div>
 
-<!-- ========== 6. 开发环境 ========== -->
-<div class="card">
-  <h2>💻 开发环境 · 工具链</h2>
-  <table>
-    <tr><th>工具</th><th>状态</th><th>版本</th><th>备注</th></tr>
-    <!-- API_START -->
-    <tr><td><a href="https://webench.ti.com" target="_blank">🌐 TI Webench</a></td><td><span class="tag active">可用</span></td><td class="mono dim">在线ms</td><td class="dim">电源方案设计</td></tr>
-    <tr><td><a href="https://www.analog.com/en/design-center/design-tools-and-calculators/ltspice-simulator.html" target="_blank">🔧 LTspice</a></td><td><span class="tag active">可用</span></td><td class="mono dim">v24ms</td><td class="dim">开关电源仿真</td></tr>
-    <tr><td>📐 Altium Designer</td><td><span class="tag active">可用</span></td><td class="mono dim">v22ms</td><td class="dim">PCB设计</td></tr>
-    <tr><td>🧩 Simplis</td><td><span class="tag pending">环路仿真</span></td><td class="mono dim">试用版ms</td><td class="dim">环路仿真</td></tr>
-    <tr><td>💻 MATLAB/Simulink</td><td><span class="tag active">可用</span></td><td class="mono dim">R2024ams</td><td class="dim">控制算法仿真</td></tr>
-    <tr><td><a href="https://www.st.com/en/development-tools/stm32cubeide.html" target="_blank">📟 STM32CubeIDE</a></td><td><span class="tag active">可用</span></td><td class="mono dim">v1.15ms</td><td class="dim">数字电源开发</td></tr>
-    <tr><td>🔬 SolidWorks</td><td><span class="tag error">不可用</span></td><td class="mono dim">—ms</td><td class="dim">待安装</td></tr>
-<!-- API_END -->
-  </table>
-</div>
-
 <p class="dim" style="text-align:center;font-size:12px;margin-top:24px;">
   ⚡ 电源方向 Dashboard · 数据由 update_dashboard.js 自动更新
 </p>
@@ -205,6 +201,83 @@ function tick() {
   document.getElementById('clock').textContent = new Date().toLocaleTimeString('zh-CN', {hour12:false});
 }
 tick(); setInterval(tick, 1000);
+
+// ============ 日志 Tab 筛选 ============
+(function(){
+  const tabs = document.querySelectorAll('#logTabs .log-tab');
+  const container = document.getElementById('logContainer');
+  let allDays = [];
+
+  function collectDays() {
+    allDays = [];
+    const days = container.querySelectorAll('.log-day');
+    days.forEach(day => {
+      const head = day.querySelector('.day-head');
+      const rows = day.querySelectorAll('.log-row');
+      const date = head ? head.textContent.replace('📅 ', '').trim() : '';
+      const entries = [];
+      rows.forEach(row => {
+        const time = row.querySelector('.ltime')?.textContent.trim() || '';
+        const text = row.querySelector('.ltext')?.innerHTML || '';
+        const tagEl = row.querySelector('.tag');
+        const tag = tagEl ? tagEl.textContent.trim() : '';
+        entries.push({ time, text, tag, el: row.outerHTML });
+      });
+      allDays.push({ date, entries, el: day.outerHTML });
+    });
+  }
+  collectDays();
+
+  function filter(cat) {
+    tabs.forEach(t => t.classList.remove('on'));
+    const active = document.querySelector(`[data-cat="${cat}"]`);
+    if (active) active.classList.add('on');
+
+    if (cat === '全部') {
+      container.innerHTML = allDays.map(d => d.el).join('');
+      return;
+    }
+
+    let html = '';
+    allDays.forEach(day => {
+      const matched = day.entries.filter(e => e.tag === cat);
+      if (matched.length === 0) return;
+      const rowsHtml = matched.map(e => e.el).join('');
+      html += `<div class="log-day"><div class="day-head">📅 ${day.date}</div>${rowsHtml}</div>`;
+    });
+    container.innerHTML = html || '<div class="dim" style="padding:12px;text-align:center;">暂无该类日志</div>';
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      filter(tab.dataset.cat);
+    });
+  });
+
+  // 今日统计
+  function updateSummary() {
+    const today = new Date().toISOString().slice(0,10);
+    const todayDay = allDays.find(d => d.date === today);
+    let counts = { '学业':0,'网站':0,'开源':0,'比赛':0,'论文':0,'系统':0 };
+    if (todayDay) {
+      todayDay.entries.forEach(e => {
+        if (counts[e.tag] !== undefined) counts[e.tag]++;
+      });
+    }
+    const summary = document.getElementById('todaySummary');
+    if (!summary) return;
+    const total = Object.values(counts).reduce((a,b)=>a+b,0);
+    summary.innerHTML = `
+      <div class="sum-item"><div class="count" style="color:var(--green);">${total}</div><div>📋 今日总数</div></div>
+      <div class="sum-item"><div class="count dim">${counts['学业']}</div><div>📊 学业</div></div>
+      <div class="sum-item"><div class="count dim">${counts['网站']}</div><div>🌐 网站</div></div>
+      <div class="sum-item"><div class="count dim">${counts['开源']}</div><div>🔧 开源</div></div>
+      <div class="sum-item"><div class="count dim">${counts['比赛']}</div><div>🏆 比赛</div></div>
+      <div class="sum-item"><div class="count dim">${counts['论文']}</div><div>📄 论文</div></div>
+    `;
+  }
+  updateSummary();
+})();
 </script>
 </body>
 </html>

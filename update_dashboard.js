@@ -146,13 +146,11 @@ function renderLogs(d) {
   if (!logs.length) return '  <div class="dim" style="padding:12px;text-align:center;">暂无日志</div>\n';
   return logs.slice(0, 7).map(day => {
     const entries = (day.entries || []).map(e =>
-      `<div class="dim" style="text-align:right;padding-right:4px;">${e.time}</div><div>${e.icon} ${e.action} <span class="tag active" style="font-size:10px;">${e.tag}</span></div>`
+      `<div class="log-row"><span class="ltime">${e.time}</span><span class="ltext">${e.icon} ${e.action} <span class="tag active" style="font-size:10px;">${e.tag}</span></span></div>`
     ).join('\n      ');
-    return `  <div style="margin-bottom:10px;">
-    <div class="dim" style="font-size:12px;margin-bottom:4px;">📅 ${day.date}</div>
-    <div style="display:grid;grid-template-columns:40px 1fr;gap:4px;font-size:13px;">
-      ${entries}
-    </div>
+    return `  <div class="log-day">
+    <div class="day-head">📅 ${day.date}</div>
+    ${entries}
   </div>\n`;
   }).join('');
 }
