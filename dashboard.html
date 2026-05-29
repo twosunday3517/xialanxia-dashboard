@@ -254,6 +254,7 @@ tick();setInterval(tick,1000);
 
     if (cat === '全部') {
       container.innerHTML = allDays.map(d => d.el).join('');
+      renderSummary('全部');
       return;
     }
 
@@ -264,44 +265,49 @@ tick();setInterval(tick,1000);
       html += `<div class="log-day"><div class="day-head">📅 ${day.date}</div>${matched.map(e=>e.el).join('')}</div>`;
     });
     container.innerHTML = html || '<div class="dim" style="padding:12px;text-align:center;">暂无该类日志</div>';
+    renderSummary(cat);
   }
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => filter(tab.dataset.cat));
   });
 
-  // 统计卡片也支持点击
-  function updateSummary() {
-    const today = new Date().toISOString().slice(0,10);
-    const todayDay = allDays.find(d => d.date === today);
-    let counts = { '网站':0,'开源':0,'比赛':0,'论文':0,'系统':0 };
-    if (todayDay) {
-      todayDay.entries.forEach(e => {
-        if (counts[e.tag] !== undefined) counts[e.tag]++;
+  // 统计卡片 — 全日志计数 + 跟随筛选动态变化
+  function getCounts(source) {
+    let c = { '网站':0,'开源':0,'比赛':0,'论文':0,'系统':0 };
+    source.forEach(day => {
+      (day.entries || []).forEach(e => {
+        if (c[e.tag] !== undefined) c[e.tag]++;
       });
-    }
+    });
+    return c;
+  }
+
+  function renderSummary(catFilter) {
+    const filtered = catFilter === '全部' ? allDays : allDays.map(d => ({
+      date: d.date,
+      entries: (d.entries || []).filter(e => e.tag === catFilter)
+    })).filter(d => d.entries.length > 0);
+    const counts = getCounts(filtered || allDays);
     const total = Object.values(counts).reduce((a,b)=>a+b,0);
     const summary = document.getElementById('todaySummary');
     if (!summary) return;
+    const h = cat => cat === catFilter ? 'sel' : '';
     summary.innerHTML = `
-      <div class="sum-item" data-go="全部"><div class="count" style="color:var(--green);">${total}</div><div>📋 今日总数</div></div>
-      <div class="sum-item" data-go="网站"><div class="count dim">${counts['网站']}</div><div>🌐 网站</div></div>
-      <div class="sum-item" data-go="开源"><div class="count dim">${counts['开源']}</div><div>🔧 开源</div></div>
-      <div class="sum-item" data-go="比赛"><div class="count dim">${counts['比赛']}</div><div>🏆 比赛</div></div>
-      <div class="sum-item" data-go="论文"><div class="count dim">${counts['论文']}</div><div>📄 论文</div></div>
+      <div class="sum-item ${h('全部')}" data-go="全部"><div class="count" style="color:var(--green);">${total}</div><div>📋 ${catFilter==='全部'?'日志总数':'筛选结果'}</div></div>
+      <div class="sum-item ${h('网站')}" data-go="网站"><div class="count dim">${counts['网站']}</div><div>🌐 网站</div></div>
+      <div class="sum-item ${h('开源')}" data-go="开源"><div class="count dim">${counts['开源']}</div><div>🔧 开源</div></div>
+      <div class="sum-item ${h('比赛')}" data-go="比赛"><div class="count dim">${counts['比赛']}</div><div>🏆 比赛</div></div>
+      <div class="sum-item ${h('论文')}" data-go="论文"><div class="count dim">${counts['论文']}</div><div>📄 论文</div></div>
     `;
-
-    // 绑定统计卡片点击
     summary.querySelectorAll('.sum-item').forEach(item => {
       item.addEventListener('click', () => {
-        const go = item.dataset.go;
-        filter(go);
-        // 高亮当前卡片
-        summary.querySelectorAll('.sum-item').forEach(s => s.classList.remove('sel'));
-        item.classList.add('sel');
+        filter(item.dataset.go);
       });
     });
   }
+
+  function updateSummary() { renderSummary('全部'); }
   updateSummary();
 })();
 </script>
