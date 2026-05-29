@@ -40,6 +40,8 @@
   ],
   "logs": [
     { "date": "2026-06-02", "entries": [
+      { "time": "08:00", "icon": "🤖", "action": "用 Claude 辅助写电赛电源方案代码，PID 参数自动整定", "tag": "AI工具" },
+      { "time": "08:30", "icon": "📄", "action": "数字控制 LLC 谐振变换器论文精读，整理了控制流程图", "tag": "论文" },
       { "time": "08:30", "icon": "📄", "action": "数字控制 LLC 谐振变换器论文精读，整理了控制流程图", "tag": "论文" },
       { "time": "10:00", "icon": "🌐", "action": "英飞凌 CoolMOS 数据手册查阅，对比 GaN 与 SiC 参数", "tag": "网站" },
       { "time": "13:00", "icon": "🔧", "action": "SimpleSMPS 项目复刻：焊接 UC3843 控制板，调试反馈回路", "tag": "开源" },
@@ -48,6 +50,7 @@
       { "time": "21:00", "icon": "📤", "action": "Dashboard 数据更新", "tag": "系统" }
     ]},
     { "date": "2026-06-01", "entries": [
+      { "time": "09:00", "icon": "🤖", "action": "DeepSeek 辅助设计 Buck 变换器补偿网络，得到 Type III 参数", "tag": "AI工具" },
       { "time": "09:30", "icon": "🌐", "action": "浏览 TI Webench，设计 48V→12V 电源方案", "tag": "网站" },
       { "time": "11:00", "icon": "🔧", "action": "复刻 OpenDCDC 项目，下载原理图", "tag": "开源" },
       { "time": "14:30", "icon": "📄", "action": "阅读 GaN DC-DC 论文，笔记已整理", "tag": "论文" },

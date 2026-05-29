@@ -65,7 +65,7 @@
 <div class="status-bar">
   <span>🟢 学习中</span>
   <span>🕐 <span id="clock"></span></span>
-  <span class="dim">更新: <span id="updateTime">2026/5/29 16:09:32</span></span>
+  <span class="dim">更新: <span id="updateTime">2026/5/29 16:12:36</span></span>
 </div>
 
 <!-- ============================================================ -->
@@ -84,6 +84,7 @@
     <span class="log-tab" data-cat="开源">🔧 开源</span>
     <span class="log-tab" data-cat="比赛">🏆 比赛</span>
     <span class="log-tab" data-cat="论文">📄 论文</span>
+    <span class="log-tab" data-cat="AI工具">🤖 AI工具</span>
     <span class="log-tab" data-cat="系统">📤 系统</span>
   </div>
 
@@ -92,7 +93,9 @@
   <!-- LOGS_START -->
   <div class="log-day">
     <div class="day-head">📅 2026-06-02</div>
-    <div class="log-row"><span class="ltime">08:30</span><span class="ltext">📄 数字控制 LLC 谐振变换器论文精读，整理了控制流程图 <span class="tag active" style="font-size:10px;">论文</span></span></div>
+    <div class="log-row"><span class="ltime">08:00</span><span class="ltext">🤖 用 Claude 辅助写电赛电源方案代码，PID 参数自动整定 <span class="tag active" style="font-size:10px;">AI工具</span></span></div>
+      <div class="log-row"><span class="ltime">08:30</span><span class="ltext">📄 数字控制 LLC 谐振变换器论文精读，整理了控制流程图 <span class="tag active" style="font-size:10px;">论文</span></span></div>
+      <div class="log-row"><span class="ltime">08:30</span><span class="ltext">📄 数字控制 LLC 谐振变换器论文精读，整理了控制流程图 <span class="tag active" style="font-size:10px;">论文</span></span></div>
       <div class="log-row"><span class="ltime">10:00</span><span class="ltext">🌐 英飞凌 CoolMOS 数据手册查阅，对比 GaN 与 SiC 参数 <span class="tag active" style="font-size:10px;">网站</span></span></div>
       <div class="log-row"><span class="ltime">13:00</span><span class="ltext">🔧 SimpleSMPS 项目复刻：焊接 UC3843 控制板，调试反馈回路 <span class="tag active" style="font-size:10px;">开源</span></span></div>
       <div class="log-row"><span class="ltime">15:30</span><span class="ltext">🏆 全国电赛电源组专题训练：Boost 变换器计算与仿真 <span class="tag active" style="font-size:10px;">比赛</span></span></div>
@@ -101,7 +104,8 @@
   </div>
   <div class="log-day">
     <div class="day-head">📅 2026-06-01</div>
-    <div class="log-row"><span class="ltime">09:30</span><span class="ltext">🌐 浏览 TI Webench，设计 48V→12V 电源方案 <span class="tag active" style="font-size:10px;">网站</span></span></div>
+    <div class="log-row"><span class="ltime">09:00</span><span class="ltext">🤖 DeepSeek 辅助设计 Buck 变换器补偿网络，得到 Type III 参数 <span class="tag active" style="font-size:10px;">AI工具</span></span></div>
+      <div class="log-row"><span class="ltime">09:30</span><span class="ltext">🌐 浏览 TI Webench，设计 48V→12V 电源方案 <span class="tag active" style="font-size:10px;">网站</span></span></div>
       <div class="log-row"><span class="ltime">11:00</span><span class="ltext">🔧 复刻 OpenDCDC 项目，下载原理图 <span class="tag active" style="font-size:10px;">开源</span></span></div>
       <div class="log-row"><span class="ltime">14:30</span><span class="ltext">📄 阅读 GaN DC-DC 论文，笔记已整理 <span class="tag active" style="font-size:10px;">论文</span></span></div>
       <div class="log-row"><span class="ltime">16:00</span><span class="ltext">🏆 电赛电源组报名准备，Buck/Boost 仿真 <span class="tag active" style="font-size:10px;">比赛</span></span></div>
@@ -226,6 +230,23 @@
 </div>
 
 <!-- ============================================================ -->
+<!--  🤖 AI工具 — 从日志"AI工具" Tab 递进展开                      -->
+<!-- ============================================================ -->
+<div class="card module-detail" id="mod-aitool">
+  <h2>🤖 好用的 AI 工具 & AI 辅助开发</h2>
+  <table>
+    <tr><th>工具</th><th>类型</th><th>用途</th><th>推荐</th></tr>
+    <tr><td><a href="https://chat.deepseek.com" target="_blank">DeepSeek</a></td><td class="dim">AI 助手</td><td class="dim">代码生成/电源方案推理/论文辅助</td><td class="green">⭐⭐⭐</td></tr>
+    <tr><td><a href="https://claude.ai" target="_blank">Claude</a></td><td class="dim">AI 助手</td><td class="dim">电路参数计算/文档撰写/PID整定</td><td class="green">⭐⭐⭐</td></tr>
+    <tr><td><a href="https://chatgpt.com" target="_blank">ChatGPT</a></td><td class="dim">AI 助手</td><td class="dim">MATLAB 脚本/电路原理图建议</td><td class="green">⭐⭐</td></tr>
+    <tr><td><a href="https://github.com/features/copilot" target="_blank">GitHub Copilot</a></td><td class="dim">AI 编码</td><td class="dim">嵌入式代码补全/STM32/Arduino</td><td class="green">⭐⭐⭐</td></tr>
+    <tr><td><a href="https://www.deepseek.com" target="_blank">Reasonix Code</a></td><td class="dim">AI 终端</td><td class="dim">自动搭建Dashboard/脚本编写/数据分析</td><td class="green">⭐⭐⭐</td></tr>
+    <tr><td><a href="https://www.ti.com/design-resources/design-tools-simulation.html" target="_blank">TI WebBench AI</a></td><td class="dim">AI 电源</td><td class="dim">AI 辅助电源方案选型/参数优化</td><td class="green">⭐⭐⭐</td></tr>
+    <tr><td><a href="https://www.altium.com" target="_blank">Altium AI</a></td><td class="dim">AI PCB</td><td class="dim">AI 自动布线/元件布局建议</td><td class="yellow">⭐⭐</td></tr>
+  </table>
+</div>
+
+<!-- ============================================================ -->
 <!--  📄 论文专题 — 从日志"论文" Tab 递进展开                       -->
 <!-- ============================================================ -->
 <div class="card module-detail" id="mod-paper">
@@ -276,6 +297,7 @@ tick();setInterval(tick,1000);
     '开源': document.getElementById('mod-opensource'),
     '比赛': document.getElementById('mod-competition'),
     '论文': document.getElementById('mod-paper'),
+    'AI工具': document.getElementById('mod-aitool'),
   };
   let allDays = [];
 
@@ -339,7 +361,7 @@ tick();setInterval(tick,1000);
 
   // 统计卡片 — 全日志计数 + 跟随筛选动态变化
   function getCounts(source) {
-    let c = { '网站':0,'开源':0,'比赛':0,'论文':0,'系统':0 };
+    let c = { '网站':0,'开源':0,'比赛':0,'论文':0,'AI工具':0,'系统':0 };
     source.forEach(day => {
       (day.entries || []).forEach(e => {
         if (c[e.tag] !== undefined) c[e.tag]++;
@@ -364,6 +386,7 @@ tick();setInterval(tick,1000);
       <div class="sum-item ${h('开源')}" data-go="开源"><div class="count dim">${counts['开源']}</div><div>🔧 开源</div></div>
       <div class="sum-item ${h('比赛')}" data-go="比赛"><div class="count dim">${counts['比赛']}</div><div>🏆 比赛</div></div>
       <div class="sum-item ${h('论文')}" data-go="论文"><div class="count dim">${counts['论文']}</div><div>📄 论文</div></div>
+      <div class="sum-item ${h('AI工具')}" data-go="AI工具"><div class="count dim">${counts['AI工具']}</div><div>🤖 AI工具</div></div>
     `;
     summary.querySelectorAll('.sum-item').forEach(item => {
       item.addEventListener('click', () => {
