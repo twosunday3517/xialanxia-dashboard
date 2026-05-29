@@ -22,6 +22,7 @@ const MARKERS = {
   watchlist: ['WATCHLIST_START', 'WATCHLIST_END'],
   memory:    ['MEMORY_START',    'MEMORY_END'],
   api:       ['API_START',       'API_END'],
+  logs:      ['LOGS_START',      'LOGS_END'],
 };
 
 function replaceSection(html, section, content) {
@@ -82,7 +83,8 @@ function renderCron(d) {
     else if (t.status === 'error') tag = `<span class="tag error">${t.error || '错误'}</span>`;
     else tag = '<span class="tag pending">待执行</span>';
     const costStr = typeof t.cost === 'number' ? `$${t.cost.toFixed(3)}` : (t.cost || '—');
-    return `    <tr><td>${t.name}</td><td class="mono dim">${t.cron}</td><td>${tag}</td><td class="dim">${t.lastRun}</td><td class="dim">${costStr}</td></tr>\n`;
+    const nameHtml = t.url ? `<a href="${t.url}" target="_blank">${t.name}</a>` : t.name;
+    return `    <tr><td>${nameHtml}</td><td class="mono dim">${t.cron}</td><td>${tag}</td><td class="dim">${t.lastRun}</td><td class="dim">${costStr}</td></tr>\n`;
   }).join('');
 }
 
@@ -95,11 +97,16 @@ function renderWatchlist(d) {
     const trigger = w.trigger || w.triggerPrice || 0;
     const dType = w.type || w.direction || '触发';
     const dist = w.distance || 0;
-    const distCls = dist < 0 ? 'red' : 'green';
-    const icon = dist < 0 ? '🔴' : '🟢';
-    const typeMap = { stop_loss: '止损', take_profit: '止盈', breakout: '突破', pullback: '回调', down: '止损', up: '止盈', trigger: '触发' };
+    const distNum = typeof dist === 'number' ? dist : 0;
+    const distCls = distNum < 0 ? 'red' : 'green';
+    const icon = distNum < 0 ? '🔴' : '🟢';
+    const typeMap = { stop_loss: '止损', take_profit: '止盈', breakout: '突破', pullback: '回调', down: '止损', up: '止盈', trigger: '触发', deadline: '截止', competition: '比赛' };
     const dLabel = typeMap[dType] || dType;
-    return `    <tr><td class="mono">${icon} ${ticker}</td><td class="mono">$${Number(price).toFixed(2)}</td><td class="mono dim">$${Number(trigger).toFixed(2)}</td><td>${dLabel}</td><td class="${distCls}">${dist >= 0 ? '+' : ''}${dist.toFixed(1)}%</td></tr>\n`;
+    const distStr = typeof dist === 'number' ? `${dist >= 0 ? '+' : ''}${dist.toFixed(1)}%` : dist;
+    const priceStr = typeof price === 'number' ? `$${price.toFixed(2)}` : price;
+    const triggerStr = typeof trigger === 'number' ? `$${trigger.toFixed(2)}` : trigger;
+    const tickerHtml = w.url ? `<a href="${w.url}" target="_blank">${ticker}</a>` : ticker;
+    return `    <tr><td class="mono">${icon} ${tickerHtml}</td><td class="mono">${priceStr}</td><td class="mono dim">${triggerStr}</td><td>${dLabel}</td><td class="${distCls}">${distStr}</td></tr>\n`;
   }).join('');
 }
 
@@ -108,7 +115,8 @@ function renderMemory(d) {
   if (!mems.length) return '  <div class="memory-item"><div class="title dim" style="text-align:center;">暂无记忆事件</div></div>\n';
   return mems.map(m => {
     const time = m.time || m.date || '--';
-    const title = m.title || (m.summary || '').slice(0, 40);
+    const titleRaw = m.title || (m.summary || '').slice(0, 40);
+    const title = m.url ? `<a href="${m.url}" target="_blank">${titleRaw}</a>` : titleRaw;
     const summary = m.summary || '';
     return `  <div class="memory-item">
     <div class="time">${time}</div>
@@ -128,7 +136,24 @@ function renderApi(d) {
     else if (a.status === 'limited' || a.status === 'warning') tag = `<span class="tag pending">${a.note || '受限'}</span>`;
     else tag = '<span class="tag pending">未知</span>';
     const latStr = a.latency ? `${a.latency}ms` : '--';
-    return `    <tr><td>${a.icon || '🔌'} ${a.name}</td><td>${tag}</td><td class="mono dim">${latStr}</td><td class="dim">${a.note || ''}</td></tr>\n`;
+    const apiNameHtml = a.url ? `<a href="${a.url}" target="_blank">${a.icon || '🔌'} ${a.name}</a>` : `${a.icon || '🔌'} ${a.name}`;
+    return `    <tr><td>${apiNameHtml}</td><td>${tag}</td><td class="mono dim">${latStr}</td><td class="dim">${a.note || ''}</td></tr>\n`;
+  }).join('');
+}
+
+function renderLogs(d) {
+  const logs = d.logs || [];
+  if (!logs.length) return '  <div class="dim" style="padding:12px;text-align:center;">暂无日志</div>\n';
+  return logs.slice(0, 7).map(day => {
+    const entries = (day.entries || []).map(e =>
+      `<div class="dim" style="text-align:right;padding-right:4px;">${e.time}</div><div>${e.icon} ${e.action} <span class="tag active" style="font-size:10px;">${e.tag}</span></div>`
+    ).join('\n      ');
+    return `  <div style="margin-bottom:10px;">
+    <div class="dim" style="font-size:12px;margin-bottom:4px;">📅 ${day.date}</div>
+    <div style="display:grid;grid-template-columns:40px 1fr;gap:4px;font-size:13px;">
+      ${entries}
+    </div>
+  </div>\n`;
   }).join('');
 }
 
@@ -140,6 +165,7 @@ const RENDERERS = {
   watchlist: renderWatchlist,
   memory:    renderMemory,
   api:       renderApi,
+  logs:      renderLogs,
 };
 
 // ============ 主函数 ============
