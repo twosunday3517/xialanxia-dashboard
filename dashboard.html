@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>⚡ 电源方向 Dashboard</title>
 <style>
-  :root { --bg: #0d0d1a; --panel: #13131f; --green: #2dd4bf; --red: #f87171; --text: #e2e8f0; --dim: #7f8ea3; --yellow: #fbbf24; --blue: #60a5fa; }
+  :root { --bg: #0d0d1a; --panel: #13131f; --green: #2dd4bf; --red: #f87171; --text: #e2e8f0; --dim: #7f8ea3; --yellow: #fbbf24; }
   body { background: var(--bg); color: var(--text); font-family: sans-serif; padding: 20px; max-width: 1000px; margin: 0 auto; }
   .card { background: var(--panel); border-radius: 8px; padding: 16px; margin: 12px 0; }
   .card h2 { font-size: 16px; margin-bottom: 10px; }
@@ -21,7 +21,7 @@
   a:hover { text-decoration: underline; }
   .status-bar { font-size: 13px; color: var(--dim); margin-bottom: 16px; display: flex; gap: 16px; }
 
-  /* 日志 Tab 标签 */
+  /* 日志 Tab */
   .log-tabs { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
   .log-tab {
     padding: 4px 14px; border-radius: 14px; font-size: 12px; cursor: pointer;
@@ -31,23 +31,32 @@
   .log-tab:hover { border-color: var(--dim); }
   .log-tab.on { background: rgba(45,212,191,.12); color: var(--green); border-color: var(--green); }
 
-  /* 日志条目 */
+  /* 日志 */
   .log-day { margin-bottom: 14px; }
   .log-day .day-head { font-size: 12px; color: var(--dim); margin-bottom: 6px; font-weight: 600; }
-  .log-row { display: grid; grid-template-columns: 42px 1fr; gap: 4px; font-size: 13px; padding: 3px 0; }
+  .log-row { display: grid; grid-template-columns: 42px 1fr; gap: 4px; font-size: 13px; padding: 3px 0; cursor: default; }
   .log-row .ltime { text-align: right; padding-right: 6px; color: var(--dim); font-size: 11px; }
   .log-row .ltext { color: var(--text); }
 
-  /* 每日总结 */
+  /* 模块详情（默认隐藏，通过 Tab 递进展开） */
+  .module-detail { display: none; }
+  .module-detail.show { display: block; }
+
+  /* 日志条目 hover 效果 */
+  .log-row:hover .ltime { color: var(--green); }
+
+  /* 每日统计 */
   .daily-summary {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     gap: 6px; margin-bottom: 16px;
   }
   .daily-summary .sum-item {
     background: var(--bg); border-radius: 6px; padding: 8px 10px; text-align: center;
-    font-size: 12px;
+    font-size: 12px; cursor: pointer; transition: .2s;
   }
+  .sum-item:hover { background: rgba(45,212,191,.06); }
   .sum-item .count { font-size: 18px; font-weight: 700; }
+  .sum-item.sel { border: 1px solid var(--green); }
 </style>
 </head>
 <body>
@@ -56,22 +65,21 @@
 <div class="status-bar">
   <span>🟢 学习中</span>
   <span>🕐 <span id="clock"></span></span>
-  <span class="dim">更新: <span id="updateTime">2026/5/29 15:59:37</span></span>
+  <span class="dim">更新: <span id="updateTime">--</span></span>
 </div>
 
-<!-- ========== 1. 每日日志（主入口） ========== -->
+<!-- ============================================================ -->
+<!--  📜 每日日志 — 入口，从这里递进到各模块                        -->
+<!-- ============================================================ -->
 <div class="card">
-  <h2>📜 每日日志 <span class="dim" style="font-weight:400;font-size:12px;">打开即看今天做了什么</span></h2>
+  <h2>📜 每日日志 <span class="dim" style="font-weight:400;font-size:12px;">点 Tab 或统计卡片递进查看</span></h2>
 
-  <!-- 今日统计 -->
-  <div class="daily-summary" id="todaySummary">
-    <!-- 由 JS 动态生成 -->
-  </div>
+  <!-- 今日统计 → 点击进入对应模块 -->
+  <div class="daily-summary" id="todaySummary"></div>
 
   <!-- 分类 Tab -->
   <div class="log-tabs" id="logTabs">
-    <span class="log-tab on" data-cat="全部">📋 全部</span>
-    <span class="log-tab" data-cat="学业">📊 学业</span>
+    <span class="log-tab on" data-cat="全部">📋 全部日志</span>
     <span class="log-tab" data-cat="网站">🌐 网站</span>
     <span class="log-tab" data-cat="开源">🔧 开源</span>
     <span class="log-tab" data-cat="比赛">🏆 比赛</span>
@@ -79,64 +87,69 @@
     <span class="log-tab" data-cat="系统">📤 系统</span>
   </div>
 
-  <!-- 日志内容 -->
+  <!-- 日志列表 -->
   <div id="logContainer">
   <!-- LOGS_START -->
   <div class="log-day">
     <div class="day-head">📅 2026-06-01</div>
     <div class="log-row"><span class="ltime">09:30</span><span class="ltext">🌐 浏览 TI Webench，设计 48V→12V 电源方案 <span class="tag active" style="font-size:10px;">网站</span></span></div>
-      <div class="log-row"><span class="ltime">11:00</span><span class="ltext">🔧 复刻 OpenDCDC 项目，下载原理图 <span class="tag active" style="font-size:10px;">开源</span></span></div>
-      <div class="log-row"><span class="ltime">14:30</span><span class="ltext">📄 阅读 GaN DC-DC 论文，笔记已整理 <span class="tag active" style="font-size:10px;">论文</span></span></div>
-      <div class="log-row"><span class="ltime">16:00</span><span class="ltext">🏆 电赛电源组报名准备，Buck/Boost 仿真 <span class="tag active" style="font-size:10px;">比赛</span></span></div>
+    <div class="log-row"><span class="ltime">11:00</span><span class="ltext">🔧 复刻 OpenDCDC 项目，下载原理图 <span class="tag active" style="font-size:10px;">开源</span></span></div>
+    <div class="log-row"><span class="ltime">14:30</span><span class="ltext">📄 阅读 GaN DC-DC 论文，笔记已整理 <span class="tag active" style="font-size:10px;">论文</span></span></div>
+    <div class="log-row"><span class="ltime">16:00</span><span class="ltext">🏆 电赛电源组报名准备，Buck/Boost 仿真 <span class="tag active" style="font-size:10px;">比赛</span></span></div>
   </div>
   <div class="log-day">
     <div class="day-head">📅 2026-05-31</div>
     <div class="log-row"><span class="ltime">10:00</span><span class="ltext">📊 电力电子技术复习：BUCK 变换器原理 <span class="tag active" style="font-size:10px;">学业</span></span></div>
-      <div class="log-row"><span class="ltime">15:00</span><span class="ltext">🌐 电源网浏览 LLC 谐振变换器文章 <span class="tag active" style="font-size:10px;">网站</span></span></div>
-      <div class="log-row"><span class="ltime">20:00</span><span class="ltext">📄 PFC 整流器论文阅读，仿真模型搭建 <span class="tag active" style="font-size:10px;">论文</span></span></div>
+    <div class="log-row"><span class="ltime">15:00</span><span class="ltext">🌐 电源网浏览 LLC 谐振变换器文章 <span class="tag active" style="font-size:10px;">网站</span></span></div>
+    <div class="log-row"><span class="ltime">20:00</span><span class="ltext">📄 PFC 整流器论文阅读，仿真模型搭建 <span class="tag active" style="font-size:10px;">论文</span></span></div>
   </div>
-  <div class="log-day">
-    <div class="day-head">📅 2026-05-30</div>
-    <div class="log-row"><span class="ltime">09:00</span><span class="ltext">🔧 SimpleSMPS 项目分析，UC3843 电路学习 <span class="tag active" style="font-size:10px;">开源</span></span></div>
-      <div class="log-row"><span class="ltime">14:00</span><span class="ltext">🏆 TI杯电源设计赛规则解读 <span class="tag active" style="font-size:10px;">比赛</span></span></div>
-      <div class="log-row"><span class="ltime">19:00</span><span class="ltext">📊 自动控制原理：PID 参数整定实验 <span class="tag active" style="font-size:10px;">学业</span></span></div>
-  </div>
-<!-- LOGS_END -->
+  <!-- LOGS_END -->
   </div>
 </div>
 
-<!-- ========== 2. 实用网站推荐 ========== -->
-<div class="card">
+<!-- ✅ 给 update_dashboard.js 的隐藏标记 — 不做 visible 区块 -->
+<div style="display:none;">
+  <!-- POSITIONS_START --><!-- POSITIONS_END -->
+  <!-- CRON_START --><!-- CRON_END -->
+  <!-- WATCHLIST_START --><!-- WATCHLIST_END -->
+  <!-- MEMORY_START --><!-- MEMORY_END -->
+  <!-- API_START --><!-- API_END -->
+</div>
+
+<!-- ============================================================ -->
+<!--  🌐 网站推荐 — 从日志"网站" Tab 递进展开                        -->
+<!-- ============================================================ -->
+<div class="card module-detail" id="mod-website">
   <h2>🌐 实用网站推荐</h2>
   <table>
-    <tr><th>网站</th><th>类型</th><th>状态</th><th>说明</th><th>推荐</th></tr>
-    <!-- CRON_START -->
-    <tr><td><a href="https://webench.ti.com" target="_blank">TI Power Designer</a></td><td class="mono dim">工具</td><td><span class="tag active">活跃</span></td><td class="dim">在线设计</td><td class="dim">⭐⭐⭐</td></tr>
-    <tr><td><a href="https://www.dianyuan.com" target="_blank">电源网 dianyuan.com</a></td><td class="mono dim">社区</td><td><span class="tag active">活跃</span></td><td class="dim">技术文章</td><td class="dim">⭐⭐⭐</td></tr>
-    <tr><td><a href="https://www.21ic.com" target="_blank">21ic 电源论坛</a></td><td class="mono dim">论坛</td><td><span class="tag active">活跃</span></td><td class="dim">经验分享</td><td class="dim">⭐⭐</td></tr>
-    <tr><td><a href="https://www.powerelectronicsnews.com" target="_blank">Power Electronics News</a></td><td class="mono dim">资讯</td><td><span class="tag error">需翻墙</span></td><td class="dim">RSS订阅</td><td class="dim">⭐</td></tr>
-    <tr><td><a href="https://www.infineon.com" target="_blank">英飞凌电源社区</a></td><td class="mono dim">方案</td><td><span class="tag active">活跃</span></td><td class="dim">参考设计</td><td class="dim">⭐⭐⭐</td></tr>
-    <tr><td><a href="https://www.mianbaoban.cn" target="_blank">面包板电源板块</a></td><td class="mono dim">问答</td><td><span class="tag pending">待执行</span></td><td class="dim">问题求助</td><td class="dim">⭐</td></tr>
-<!-- CRON_END -->
+    <tr><th>网站</th><th>类型</th><th>说明</th><th>推荐</th></tr>
+    <tr><td><a href="https://webench.ti.com" target="_blank">TI Power Designer</a></td><td class="dim">工具</td><td class="dim">电源方案一键生成</td><td class="green">⭐⭐⭐</td></tr>
+    <tr><td><a href="https://www.dianyuan.com" target="_blank">电源网</a></td><td class="dim">社区</td><td class="dim">中文电源技术社区</td><td class="green">⭐⭐⭐</td></tr>
+    <tr><td><a href="https://www.21ic.com" target="_blank">21ic 电源论坛</a></td><td class="dim">论坛</td><td class="dim">工程师实战经验</td><td class="green">⭐⭐</td></tr>
+    <tr><td><a href="https://www.powerelectronicsnews.com" target="_blank">PE News</a></td><td class="dim">资讯</td><td class="dim red">需翻墙</td><td class="yellow">⭐</td></tr>
+    <tr><td><a href="https://www.infineon.com" target="_blank">英飞凌电源社区</a></td><td class="dim">方案</td><td class="dim">CoolMOS/CoolSiC 方案</td><td class="green">⭐⭐⭐</td></tr>
+    <tr><td><a href="https://www.mianbaoban.cn" target="_blank">面包板电源板块</a></td><td class="dim">问答</td><td class="dim">问题求助交流</td><td class="yellow">⭐</td></tr>
   </table>
 </div>
 
-<!-- ========== 3. 开源项目 ========== -->
-<div class="card">
+<!-- ============================================================ -->
+<!--  🔧 开源项目 — 从日志"开源" Tab 递进展开                       -->
+<!-- ============================================================ -->
+<div class="card module-detail" id="mod-opensource">
   <h2>🔧 优秀电源开源项目推荐</h2>
   <table>
     <tr><th>项目</th><th>特性</th><th>方向</th><th>难度</th><th>推荐理由</th></tr>
-    <!-- WATCHLIST_START -->
-    <tr><td class="mono">🟢 <a href="https://github.com/search?q=open+dcdc+converter" target="_blank">OpenDCDC</a></td><td class="mono">48V→12V</td><td class="mono dim">隔离DC-DC</td><td>开源项目</td><td class="green">⭐⭐</td></tr>
-    <tr><td class="mono">🟢 <a href="https://github.com/search?q=simple+smps+uc3843" target="_blank">SimpleSMPS</a></td><td class="mono">UC3843方案</td><td class="mono dim">开关电源</td><td>开源项目</td><td class="green">⭐⭐</td></tr>
-    <tr><td class="mono">🟢 <a href="https://github.com/search?q=usb+pd+stm32+power" target="_blank">USB-PD 数字电源</a></td><td class="mono">STM32方案</td><td class="mono dim">数字电源</td><td>开源项目</td><td class="green">⭐⭐⭐</td></tr>
-    <tr><td class="mono">🟢 <a href="https://github.com/search?q=gan+inverter+open+source" target="_blank">GaN 逆变器</a></td><td class="mono">高频GaN</td><td class="mono dim">逆变器</td><td>开源项目</td><td class="green">⭐⭐⭐⭐</td></tr>
-<!-- WATCHLIST_END -->
+    <tr><td class="mono"><a href="https://github.com/search?q=open+dcdc+converter" target="_blank">OpenDCDC</a></td><td class="mono dim">48V→12V</td><td class="mono dim">隔离DC-DC</td><td class="green">⭐⭐</td><td class="dim">适合入门复刻</td></tr>
+    <tr><td class="mono"><a href="https://github.com/search?q=simple+smps+uc3843" target="_blank">SimpleSMPS</a></td><td class="mono dim">UC3843方案</td><td class="mono dim">开关电源</td><td class="green">⭐⭐</td><td class="dim">PCB+原理图全开源</td></tr>
+    <tr><td class="mono"><a href="https://github.com/search?q=usb+pd+stm32+power" target="_blank">USB-PD 数字电源</a></td><td class="mono dim">STM32方案</td><td class="mono dim">数字电源</td><td class="yellow">⭐⭐⭐</td><td class="dim">PD3.0协议</td></tr>
+    <tr><td class="mono"><a href="https://github.com/search?q=gan+inverter+open+source" target="_blank">GaN 逆变器</a></td><td class="mono dim">高频GaN</td><td class="mono dim">逆变器</td><td class="red">⭐⭐⭐⭐</td><td class="dim">适合进阶学习</td></tr>
   </table>
 </div>
 
-<!-- ========== 4. 比赛推送 ========== -->
-<div class="card">
+<!-- ============================================================ -->
+<!--  🏆 比赛推送 — 从日志"比赛" Tab 递进展开                       -->
+<!-- ============================================================ -->
+<div class="card module-detail" id="mod-competition">
   <h2>🏆 比赛推送 · 含报名时间</h2>
   <table>
     <tr><th>比赛</th><th>时间</th><th>报名截止</th><th>状态</th><th>准备</th></tr>
@@ -147,63 +160,68 @@
   </table>
 </div>
 
-<!-- ========== 5. 论文专题 ========== -->
-<div class="card">
-  <h2>📄 论文专题 · 可接受 & 可复刻</h2>
-  <!-- MEMORY_START -->
-  <div class="memory-item">
-    <div class="time">📄 2026-06</div>
-    <div class="title"><a href="https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=GaN+high+frequency+DC-DC+converter" target="_blank">GaN 基高频 DC-DC 变换器综述</a></div>
-    <div class="summary">可复刻：48V→12V 降压，开关频率 >1MHz，GaN HEMT 驱动设计</div>
+<!-- ============================================================ -->
+<!--  📄 论文专题 — 从日志"论文" Tab 递进展开                       -->
+<!-- ============================================================ -->
+<div class="card module-detail" id="mod-paper">
+  <h2>📄 论文专题 · 可复刻</h2>
+  <div style="padding:8px 0;border-bottom:1px solid #1e1e33;font-size:13px;">
+    <div class="dim" style="font-size:11px;">📄 2026-06</div>
+    <div style="font-weight:600;margin:2px 0;"><a href="https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=GaN+high+frequency+DC-DC+converter" target="_blank">GaN 基高频 DC-DC 变换器综述</a></div>
+    <div class="dim">可复刻：48V→12V 降压，开关频率 >1MHz，GaN HEMT 驱动设计</div>
   </div>
-  <div class="memory-item">
-    <div class="time">📄 2026-06</div>
-    <div class="title"><a href="https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=digital+control+LLC+resonant+converter" target="_blank">数字控制 LLC 谐振变换器</a></div>
-    <div class="summary">可复刻：STM32F334 数字控制，400V→48V，PFM+PWM 混合调制</div>
+  <div style="padding:8px 0;border-bottom:1px solid #1e1e33;font-size:13px;">
+    <div class="dim" style="font-size:11px;">📄 2026-06</div>
+    <div style="font-weight:600;margin:2px 0;"><a href="https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=digital+control+LLC+resonant+converter" target="_blank">数字控制 LLC 谐振变换器</a></div>
+    <div class="dim">可复刻：STM32F334 数字控制，400V→48V</div>
   </div>
-  <div class="memory-item">
-    <div class="time">📄 2026-05</div>
-    <div class="title"><a href="https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=wide+bandgap+gate+drive+circuit" target="_blank">宽禁带器件驱动电路设计</a></div>
-    <div class="summary">可复刻：SiC MOSFET 驱动，隔离电源，米勒钳位保护</div>
+  <div style="padding:8px 0;border-bottom:1px solid #1e1e33;font-size:13px;">
+    <div class="dim" style="font-size:11px;">📄 2026-05</div>
+    <div style="font-weight:600;margin:2px 0;"><a href="https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=wide+bandgap+gate+drive+circuit" target="_blank">宽禁带器件驱动电路设计</a></div>
+    <div class="dim">可复刻：SiC MOSFET 驱动，隔离电源，米勒钳位保护</div>
   </div>
-  <div class="memory-item">
-    <div class="time">📄 2026-05</div>
-    <div class="title"><a href="https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=bidirectional+DC-DC+converter+energy+storage" target="_blank">双向 DC-DC 在储能中的应用</a></div>
-    <div class="summary">可复刻：Buck-Boost 拓扑，数字PID控制，电池充放电管理</div>
+  <div style="padding:8px 0;border-bottom:1px solid #1e1e33;font-size:13px;">
+    <div class="dim" style="font-size:11px;">📄 2026-05</div>
+    <div style="font-weight:600;margin:2px 0;"><a href="https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=bidirectional+DC-DC+converter+energy+storage" target="_blank">双向 DC-DC 在储能中的应用</a></div>
+    <div class="dim">可复刻：Buck-Boost 拓扑，数字PID控制，电池充放电管理</div>
   </div>
-  <div class="memory-item">
-    <div class="time">📄 2026-04</div>
-    <div class="title"><a href="https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=high+efficiency+PFC+rectifier+design" target="_blank">高效率 PFC 整流器设计</a></div>
-    <div class="summary">可复刻：Boost PFC，UC3854 控制，300W，THD<5%</div>
+  <div style="padding:8px 0;font-size:13px;">
+    <div class="dim" style="font-size:11px;">📄 2026-04</div>
+    <div style="font-weight:600;margin:2px 0;"><a href="https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=high+efficiency+PFC+rectifier+design" target="_blank">高效率 PFC 整流器设计</a></div>
+    <div class="dim">可复刻：Boost PFC，UC3854 控制，300W，THD<5%</div>
   </div>
-<!-- MEMORY_END -->
 </div>
 
 <p class="dim" style="text-align:center;font-size:12px;margin-top:24px;">
-  ⚡ 电源方向 Dashboard · 数据由 update_dashboard.js 自动更新
+  ⚡ 电源方向 Dashboard · 打开就看日志 · 点 Tab 递进到详情
 </p>
 
 <script>
 function tick() {
-  document.getElementById('clock').textContent = new Date().toLocaleTimeString('zh-CN', {hour12:false});
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString('zh-CN',{hour12:false});
 }
-tick(); setInterval(tick, 1000);
+tick();setInterval(tick,1000);
 
-// ============ 日志 Tab 筛选 ============
+// ============ 递进逻辑：Tab → 日志筛选 + 展开对应模块 ============
 (function(){
   const tabs = document.querySelectorAll('#logTabs .log-tab');
   const container = document.getElementById('logContainer');
+  const modules = {
+    '网站': document.getElementById('mod-website'),
+    '开源': document.getElementById('mod-opensource'),
+    '比赛': document.getElementById('mod-competition'),
+    '论文': document.getElementById('mod-paper'),
+  };
   let allDays = [];
 
+  // 收集所有日志条目
   function collectDays() {
     allDays = [];
-    const days = container.querySelectorAll('.log-day');
-    days.forEach(day => {
+    container.querySelectorAll('.log-day').forEach(day => {
       const head = day.querySelector('.day-head');
-      const rows = day.querySelectorAll('.log-row');
-      const date = head ? head.textContent.replace('📅 ', '').trim() : '';
+      const date = head ? head.textContent.replace('📅 ','').trim() : '';
       const entries = [];
-      rows.forEach(row => {
+      day.querySelectorAll('.log-row').forEach(row => {
         const time = row.querySelector('.ltime')?.textContent.trim() || '';
         const text = row.querySelector('.ltext')?.innerHTML || '';
         const tagEl = row.querySelector('.tag');
@@ -215,10 +233,24 @@ tick(); setInterval(tick, 1000);
   }
   collectDays();
 
+  // 隐藏所有模块
+  function hideAllModules() {
+    Object.values(modules).forEach(m => { if(m) m.classList.remove('show'); });
+  }
+
+  // 筛选
   function filter(cat) {
     tabs.forEach(t => t.classList.remove('on'));
-    const active = document.querySelector(`[data-cat="${cat}"]`);
+    const active = document.querySelector(`#logTabs [data-cat="${cat}"]`);
     if (active) active.classList.add('on');
+
+    // 递进展开对应模块
+    hideAllModules();
+    if (modules[cat]) {
+      modules[cat].classList.add('show');
+      // 滚动到模块
+      setTimeout(() => modules[cat].scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
 
     if (cat === '全部') {
       container.innerHTML = allDays.map(d => d.el).join('');
@@ -229,39 +261,46 @@ tick(); setInterval(tick, 1000);
     allDays.forEach(day => {
       const matched = day.entries.filter(e => e.tag === cat);
       if (matched.length === 0) return;
-      const rowsHtml = matched.map(e => e.el).join('');
-      html += `<div class="log-day"><div class="day-head">📅 ${day.date}</div>${rowsHtml}</div>`;
+      html += `<div class="log-day"><div class="day-head">📅 ${day.date}</div>${matched.map(e=>e.el).join('')}</div>`;
     });
     container.innerHTML = html || '<div class="dim" style="padding:12px;text-align:center;">暂无该类日志</div>';
   }
 
   tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      filter(tab.dataset.cat);
-    });
+    tab.addEventListener('click', () => filter(tab.dataset.cat));
   });
 
-  // 今日统计
+  // 统计卡片也支持点击
   function updateSummary() {
     const today = new Date().toISOString().slice(0,10);
     const todayDay = allDays.find(d => d.date === today);
-    let counts = { '学业':0,'网站':0,'开源':0,'比赛':0,'论文':0,'系统':0 };
+    let counts = { '网站':0,'开源':0,'比赛':0,'论文':0,'系统':0 };
     if (todayDay) {
       todayDay.entries.forEach(e => {
         if (counts[e.tag] !== undefined) counts[e.tag]++;
       });
     }
+    const total = Object.values(counts).reduce((a,b)=>a+b,0);
     const summary = document.getElementById('todaySummary');
     if (!summary) return;
-    const total = Object.values(counts).reduce((a,b)=>a+b,0);
     summary.innerHTML = `
-      <div class="sum-item"><div class="count" style="color:var(--green);">${total}</div><div>📋 今日总数</div></div>
-      <div class="sum-item"><div class="count dim">${counts['学业']}</div><div>📊 学业</div></div>
-      <div class="sum-item"><div class="count dim">${counts['网站']}</div><div>🌐 网站</div></div>
-      <div class="sum-item"><div class="count dim">${counts['开源']}</div><div>🔧 开源</div></div>
-      <div class="sum-item"><div class="count dim">${counts['比赛']}</div><div>🏆 比赛</div></div>
-      <div class="sum-item"><div class="count dim">${counts['论文']}</div><div>📄 论文</div></div>
+      <div class="sum-item" data-go="全部"><div class="count" style="color:var(--green);">${total}</div><div>📋 今日总数</div></div>
+      <div class="sum-item" data-go="网站"><div class="count dim">${counts['网站']}</div><div>🌐 网站</div></div>
+      <div class="sum-item" data-go="开源"><div class="count dim">${counts['开源']}</div><div>🔧 开源</div></div>
+      <div class="sum-item" data-go="比赛"><div class="count dim">${counts['比赛']}</div><div>🏆 比赛</div></div>
+      <div class="sum-item" data-go="论文"><div class="count dim">${counts['论文']}</div><div>📄 论文</div></div>
     `;
+
+    // 绑定统计卡片点击
+    summary.querySelectorAll('.sum-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const go = item.dataset.go;
+        filter(go);
+        // 高亮当前卡片
+        summary.querySelectorAll('.sum-item').forEach(s => s.classList.remove('sel'));
+        item.classList.add('sel');
+      });
+    });
   }
   updateSummary();
 })();
