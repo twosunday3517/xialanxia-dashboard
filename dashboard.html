@@ -65,7 +65,7 @@
 <div class="status-bar">
   <span>🟢 学习中</span>
   <span>🕐 <span id="clock"></span></span>
-  <span class="dim">更新: <span id="updateTime">2026/5/29 16:12:36</span></span>
+  <span class="dim">更新: <span id="updateTime">2026/5/29 16:15:17</span></span>
 </div>
 
 <!-- ============================================================ -->
@@ -100,6 +100,7 @@
       <div class="log-row"><span class="ltime">13:00</span><span class="ltext">🔧 SimpleSMPS 项目复刻：焊接 UC3843 控制板，调试反馈回路 <span class="tag active" style="font-size:10px;">开源</span></span></div>
       <div class="log-row"><span class="ltime">15:30</span><span class="ltext">🏆 全国电赛电源组专题训练：Boost 变换器计算与仿真 <span class="tag active" style="font-size:10px;">比赛</span></span></div>
       <div class="log-row"><span class="ltime">19:00</span><span class="ltext">📊 开关电源设计课程：变压器绕组设计，完成作业提交 <span class="tag active" style="font-size:10px;">学业</span></span></div>
+      <div class="log-row"><span class="ltime">20:30</span><span class="ltext">🤖 VS Code + Copilot 写 STM32 数字电源控制代码，AI 自动生成 PWM 配置 <span class="tag active" style="font-size:10px;">AI工具</span></span></div>
       <div class="log-row"><span class="ltime">21:00</span><span class="ltext">📤 Dashboard 数据更新 <span class="tag active" style="font-size:10px;">系统</span></span></div>
   </div>
   <div class="log-day">
@@ -233,16 +234,16 @@
 <!--  🤖 AI工具 — 从日志"AI工具" Tab 递进展开                      -->
 <!-- ============================================================ -->
 <div class="card module-detail" id="mod-aitool">
-  <h2>🤖 好用的 AI 工具 & AI 辅助开发</h2>
+  <h2>🤖 AI 辅助运用 · 工作流</h2>
   <table>
-    <tr><th>工具</th><th>类型</th><th>用途</th><th>推荐</th></tr>
-    <tr><td><a href="https://chat.deepseek.com" target="_blank">DeepSeek</a></td><td class="dim">AI 助手</td><td class="dim">代码生成/电源方案推理/论文辅助</td><td class="green">⭐⭐⭐</td></tr>
-    <tr><td><a href="https://claude.ai" target="_blank">Claude</a></td><td class="dim">AI 助手</td><td class="dim">电路参数计算/文档撰写/PID整定</td><td class="green">⭐⭐⭐</td></tr>
-    <tr><td><a href="https://chatgpt.com" target="_blank">ChatGPT</a></td><td class="dim">AI 助手</td><td class="dim">MATLAB 脚本/电路原理图建议</td><td class="green">⭐⭐</td></tr>
-    <tr><td><a href="https://github.com/features/copilot" target="_blank">GitHub Copilot</a></td><td class="dim">AI 编码</td><td class="dim">嵌入式代码补全/STM32/Arduino</td><td class="green">⭐⭐⭐</td></tr>
-    <tr><td><a href="https://www.deepseek.com" target="_blank">Reasonix Code</a></td><td class="dim">AI 终端</td><td class="dim">自动搭建Dashboard/脚本编写/数据分析</td><td class="green">⭐⭐⭐</td></tr>
-    <tr><td><a href="https://www.ti.com/design-resources/design-tools-simulation.html" target="_blank">TI WebBench AI</a></td><td class="dim">AI 电源</td><td class="dim">AI 辅助电源方案选型/参数优化</td><td class="green">⭐⭐⭐</td></tr>
-    <tr><td><a href="https://www.altium.com" target="_blank">Altium AI</a></td><td class="dim">AI PCB</td><td class="dim">AI 自动布线/元件布局建议</td><td class="yellow">⭐⭐</td></tr>
+    <tr><th>工作流</th><th>工具组合</th><th>说明</th><th>推荐</th></tr>
+    <tr><td>💻 嵌入式开发</td><td><a href="https://code.visualstudio.com" target="_blank">VS Code</a> + <a href="https://github.com/features/copilot" target="_blank">Copilot</a>/<a href="https://cline.bot" target="_blank">Cline</a></td><td class="dim">AI 补全 STM32 代码、自动生成驱动、智能 Debug</td><td class="green">⭐⭐⭐</td></tr>
+    <tr><td>📊 电源仿真</td><td><a href="https://www.plexim.com/plecs" target="_blank">PLECS</a> + <a href="https://chat.deepseek.com" target="_blank">DeepSeek</a></td><td class="dim">AI 辅助搭建电力电子仿真模型，自动生成参数扫描脚本</td><td class="green">⭐⭐⭐</td></tr>
+    <tr><td>🎛️ 控制算法</td><td><a href="https://www.mathworks.com/products/matlab.html" target="_blank">MATLAB</a>/<a href="https://www.mathworks.com/products/simulink.html" target="_blank">Simulink</a> + <a href="https://claude.ai" target="_blank">Claude</a></td><td class="dim">AI 生成 Bode 图分析脚本、PID 参数自动整定、状态空间建模</td><td class="green">⭐⭐⭐</td></tr>
+    <tr><td>🖥️ PCB 设计</td><td><a href="https://www.altium.com" target="_blank">Altium</a> + <a href="https://chatgpt.com" target="_blank">ChatGPT</a></td><td class="dim">AI 建议元件布局、自动规则检查、热分析优化</td><td class="yellow">⭐⭐</td></tr>
+    <tr><td>📐 电源计算</td><td><a href="https://webench.ti.com" target="_blank">TI WebBench</a> + <a href="https://www.deepseek.com" target="_blank">DeepSeek</a></td><td class="dim">AI 辅助选择拓扑、计算 LC 参数、效率优化</td><td class="green">⭐⭐⭐</td></tr>
+    <tr><td>📝 论文写作</td><td><a href="https://claude.ai" target="_blank">Claude</a> + <a href="https://www.zotero.org" target="_blank">Zotero</a></td><td class="dim">AI 辅助文献综述、论文润色、自动参考文献管理</td><td class="green">⭐⭐⭐</td></tr>
+    <tr><td>🧪 实验分析</td><td><a href="https://www.python.org" target="_blank">Python</a> + <a href="https://chat.deepseek.com" target="_blank">DeepSeek</a></td><td class="dim">AI 生成数据分析脚本、波形 FFT 分析、实验报告自动化</td><td class="green">⭐⭐⭐</td></tr>
   </table>
 </div>
 

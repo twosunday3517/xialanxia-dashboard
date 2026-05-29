@@ -47,6 +47,7 @@
       { "time": "13:00", "icon": "🔧", "action": "SimpleSMPS 项目复刻：焊接 UC3843 控制板，调试反馈回路", "tag": "开源" },
       { "time": "15:30", "icon": "🏆", "action": "全国电赛电源组专题训练：Boost 变换器计算与仿真", "tag": "比赛" },
       { "time": "19:00", "icon": "📊", "action": "开关电源设计课程：变压器绕组设计，完成作业提交", "tag": "学业" },
+      { "time": "20:30", "icon": "🤖", "action": "VS Code + Copilot 写 STM32 数字电源控制代码，AI 自动生成 PWM 配置", "tag": "AI工具" },
       { "time": "21:00", "icon": "📤", "action": "Dashboard 数据更新", "tag": "系统" }
     ]},
     { "date": "2026-06-01", "entries": [
