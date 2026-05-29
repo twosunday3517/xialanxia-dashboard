@@ -9,33 +9,33 @@
     ]
   },
   "cronTasks": [
-    { "name": "🌐 TI Power Designer",      "cron": "工具",   "status": "active",  "lastRun": "在线仿真", "cost": "推荐" },
-    { "name": "📚 电源网 dianyuan.com",  "cron": "社区",  "status": "active",  "lastRun": "技术文章", "cost": "推荐" },
-    { "name": "🔬 21ic 电源论坛",      "cron": "论坛",  "status": "active",  "lastRun": "经验分享", "cost": "推荐" },
-    { "name": "📡 Power Electronics News",      "cron": "资讯",   "status": "error",   "lastRun": "RSS订阅", "cost": "待配置", "error": "需翻墙" },
-    { "name": "💡 英飞凌电源社区",      "cron": "方案", "status": "active",  "lastRun": "参考设计", "cost": "推荐" },
-    { "name": "🧩 面包板电源板块",      "cron": "问答", "status": "pending","lastRun": "问题求助", "cost": "偶尔看" }
+    { "name": "TI Power Designer", "url": "https://webench.ti.com", "cron": "工具", "status": "active", "lastRun": "在线设计", "cost": "⭐⭐⭐" },
+    { "name": "电源网 dianyuan.com", "url": "https://www.dianyuan.com", "cron": "社区", "status": "active", "lastRun": "技术文章", "cost": "⭐⭐⭐" },
+    { "name": "21ic 电源论坛", "url": "https://www.21ic.com", "cron": "论坛", "status": "active", "lastRun": "经验分享", "cost": "⭐⭐" },
+    { "name": "Power Electronics News", "url": "https://www.powerelectronicsnews.com", "cron": "资讯", "status": "error", "lastRun": "RSS订阅", "cost": "⭐", "error": "需翻墙" },
+    { "name": "英飞凌电源社区", "url": "https://www.infineon.com", "cron": "方案", "status": "active", "lastRun": "参考设计", "cost": "⭐⭐⭐" },
+    { "name": "面包板电源板块", "url": "https://www.mianbaoban.cn", "cron": "问答", "status": "pending", "lastRun": "问题求助", "cost": "⭐" }
   ],
   "watchlist": [
-    { "ticker": "🏆 电赛（电源组）", "price": "8月",  "trigger": "7月",  "type": "报名",  "distance": "+60天" },
-    { "ticker": "🏆 TI杯电源设计赛", "price": "9月",  "trigger": "8月",  "type": "报名",  "distance": "+90天" },
-    { "ticker": "🏆 中国电源学会竞赛", "price": "10月", "trigger": "9月", "type": "提交", "distance": "+120天" },
-    { "ticker": "🏆 集成电路双创赛", "price": "7月", "trigger": "6月", "type": "报名", "distance": "+30天" }
+    { "ticker": "OpenDCDC", "url": "https://github.com/search?q=open+dcdc+converter", "price": "48V→12V", "trigger": "隔离DC-DC", "type": "开源项目", "distance": "⭐⭐", "direction": "适合入门复刻" },
+    { "ticker": "SimpleSMPS", "url": "https://github.com/search?q=simple+smps+uc3843", "price": "UC3843方案", "trigger": "开关电源", "type": "开源项目", "distance": "⭐⭐", "direction": "PCB+原理图全开源" },
+    { "ticker": "USB-PD 数字电源", "url": "https://github.com/search?q=usb+pd+stm32+power", "price": "STM32方案", "trigger": "数字电源", "type": "开源项目", "distance": "⭐⭐⭐", "direction": "PD3.0协议" },
+    { "ticker": "GaN 逆变器", "url": "https://github.com/search?q=gan+inverter+open+source", "price": "高频GaN", "trigger": "逆变器", "type": "开源项目", "distance": "⭐⭐⭐⭐", "direction": "适合进阶" }
   ],
   "memories": [
-    { "time": "2026-06", "title": "📄 GaN 基高频DC-DC变换器综述",      "summary": "Review of GaN-based high-frequency DC-DC converters. 可复刻：48V→12V 降压，开关频率 >1MHz" },
-    { "time": "2026-06", "title": "📄 数字控制 LLC 谐振变换器", "summary": "Digital control of LLC resonant converter. 可复刻：STM32F334 数字控制，400V→48V" },
-    { "time": "2026-05", "title": "📄 宽禁带器件驱动电路设计", "summary": "Gate drive circuit design for wide-bandgap devices. 可复刻：SiC MOSFET 驱动，隔离电源" },
-    { "time": "2026-05", "title": "📄 双向 DC-DC 在储能中的应用",        "summary": "Bidirectional DC-DC for energy storage. 可复刻：Buck-Boost 拓扑，数字PID控制" },
-    { "time": "2026-04", "title": "📄 高效率 PFC 整流器设计",          "summary": "High-efficiency PFC rectifier design. 可复刻：Boost PFC，UC3854 控制，300W" }
+    { "time": "📄 2026-06", "title": "GaN 基高频 DC-DC 变换器综述", "url": "https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=GaN+high+frequency+DC-DC+converter", "summary": "可复刻：48V→12V 降压，开关频率 >1MHz，GaN HEMT 驱动设计" },
+    { "time": "📄 2026-06", "title": "数字控制 LLC 谐振变换器", "url": "https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=digital+control+LLC+resonant+converter", "summary": "可复刻：STM32F334 数字控制，400V→48V，PFM+PWM 混合调制" },
+    { "time": "📄 2026-05", "title": "宽禁带器件驱动电路设计", "url": "https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=wide+bandgap+gate+drive+circuit", "summary": "可复刻：SiC MOSFET 驱动，隔离电源，米勒钳位保护" },
+    { "time": "📄 2026-05", "title": "双向 DC-DC 在储能中的应用", "url": "https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=bidirectional+DC-DC+converter+energy+storage", "summary": "可复刻：Buck-Boost 拓扑，数字PID控制，电池充放电管理" },
+    { "time": "📄 2026-04", "title": "高效率 PFC 整流器设计", "url": "https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=high+efficiency+PFC+rectifier+design", "summary": "可复刻：Boost PFC，UC3854 控制，300W，THD<5%" }
   ],
   "apis": [
-    { "icon": "⚡", "name": "TI Webench",     "status": "available",  "latency": "在线", "note": "电源仿真设计" },
-    { "icon": "🔧", "name": "LTspice",  "status": "available", "latency": "v24", "note": "开关电源仿真" },
-    { "icon": "📐", "name": "Altium Designer", "status": "available",  "latency": "v22", "note": "PCB设计" },
-    { "icon": "🧩", "name": "Simplis",     "status": "limited",  "latency": "试用版", "note": "环路仿真" },
-    { "icon": "💻", "name": "MATLAB/Simulink",  "status": "available",  "latency": "R2024a", "note": "控制算法仿真" },
-    { "icon": "📟", "name": "STM32CubeIDE",  "status": "available",  "latency": "v1.15", "note": "数字电源开发" },
-    { "icon": "🔬", "name": "CAD",    "status": "unavailable", "latency": "—", "note": "待安装 SolidWorks" }
+    { "icon": "🌐", "name": "TI Webench", "url": "https://webench.ti.com", "status": "available", "latency": "在线", "note": "电源方案设计" },
+    { "icon": "🔧", "name": "LTspice", "url": "https://www.analog.com/en/design-center/design-tools-and-calculators/ltspice-simulator.html", "status": "available", "latency": "v24", "note": "开关电源仿真" },
+    { "icon": "📐", "name": "Altium Designer", "status": "available", "latency": "v22", "note": "PCB设计" },
+    { "icon": "🧩", "name": "Simplis", "status": "limited", "latency": "试用版", "note": "环路仿真" },
+    { "icon": "💻", "name": "MATLAB/Simulink", "status": "available", "latency": "R2024a", "note": "控制算法仿真" },
+    { "icon": "📟", "name": "STM32CubeIDE", "url": "https://www.st.com/en/development-tools/stm32cubeide.html", "status": "available", "latency": "v1.15", "note": "数字电源开发" },
+    { "icon": "🔬", "name": "SolidWorks", "status": "unavailable", "latency": "—", "note": "待安装" }
   ]
 }

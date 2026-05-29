@@ -82,7 +82,8 @@ function renderCron(d) {
     else if (t.status === 'error') tag = `<span class="tag error">${t.error || '错误'}</span>`;
     else tag = '<span class="tag pending">待执行</span>';
     const costStr = typeof t.cost === 'number' ? `$${t.cost.toFixed(3)}` : (t.cost || '—');
-    return `    <tr><td>${t.name}</td><td class="mono dim">${t.cron}</td><td>${tag}</td><td class="dim">${t.lastRun}</td><td class="dim">${costStr}</td></tr>\n`;
+    const nameHtml = t.url ? `<a href="${t.url}" target="_blank">${t.name}</a>` : t.name;
+    return `    <tr><td>${nameHtml}</td><td class="mono dim">${t.cron}</td><td>${tag}</td><td class="dim">${t.lastRun}</td><td class="dim">${costStr}</td></tr>\n`;
   }).join('');
 }
 
@@ -103,7 +104,8 @@ function renderWatchlist(d) {
     const distStr = typeof dist === 'number' ? `${dist >= 0 ? '+' : ''}${dist.toFixed(1)}%` : dist;
     const priceStr = typeof price === 'number' ? `$${price.toFixed(2)}` : price;
     const triggerStr = typeof trigger === 'number' ? `$${trigger.toFixed(2)}` : trigger;
-    return `    <tr><td class="mono">${icon} ${ticker}</td><td class="mono">${priceStr}</td><td class="mono dim">${triggerStr}</td><td>${dLabel}</td><td class="${distCls}">${distStr}</td></tr>\n`;
+    const tickerHtml = w.url ? `<a href="${w.url}" target="_blank">${ticker}</a>` : ticker;
+    return `    <tr><td class="mono">${icon} ${tickerHtml}</td><td class="mono">${priceStr}</td><td class="mono dim">${triggerStr}</td><td>${dLabel}</td><td class="${distCls}">${distStr}</td></tr>\n`;
   }).join('');
 }
 
@@ -112,7 +114,8 @@ function renderMemory(d) {
   if (!mems.length) return '  <div class="memory-item"><div class="title dim" style="text-align:center;">暂无记忆事件</div></div>\n';
   return mems.map(m => {
     const time = m.time || m.date || '--';
-    const title = m.title || (m.summary || '').slice(0, 40);
+    const titleRaw = m.title || (m.summary || '').slice(0, 40);
+    const title = m.url ? `<a href="${m.url}" target="_blank">${titleRaw}</a>` : titleRaw;
     const summary = m.summary || '';
     return `  <div class="memory-item">
     <div class="time">${time}</div>
@@ -132,7 +135,8 @@ function renderApi(d) {
     else if (a.status === 'limited' || a.status === 'warning') tag = `<span class="tag pending">${a.note || '受限'}</span>`;
     else tag = '<span class="tag pending">未知</span>';
     const latStr = a.latency ? `${a.latency}ms` : '--';
-    return `    <tr><td>${a.icon || '🔌'} ${a.name}</td><td>${tag}</td><td class="mono dim">${latStr}</td><td class="dim">${a.note || ''}</td></tr>\n`;
+    const apiNameHtml = a.url ? `<a href="${a.url}" target="_blank">${a.icon || '🔌'} ${a.name}</a>` : `${a.icon || '🔌'} ${a.name}`;
+    return `    <tr><td>${apiNameHtml}</td><td>${tag}</td><td class="mono dim">${latStr}</td><td class="dim">${a.note || ''}</td></tr>\n`;
   }).join('');
 }
 
