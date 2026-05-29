@@ -1,90 +1,41 @@
 {
-  "system": {
-    "name": "🦞 小龙虾",
-    "status": "ONLINE",
-    "version": "v2.1.0",
-    "lastUpdate": "2026-05-29 22:00:00",
-    "uptime": "12d 7h 23m"
-  },
   "portfolio": {
-    "totalValue": 148386,
-    "totalCost": 150000,
-    "totalPnl": -1614,
-    "totalPnlPercent": -1.08,
+    "total": 148386,
+    "totalPnl": -1.08,
     "accounts": [
-      {
-        "name": "🏦 大机构",
-        "value": 37481,
-        "cost": 40000,
-        "pnl": -2519,
-        "pnlPercent": -6.30,
-        "cash": 13640,
-        "holdings": 3
-      },
-      {
-        "name": "⚡ 激进交易",
-        "value": 56457,
-        "cost": 55000,
-        "pnl": 1457,
-        "pnlPercent": 2.65,
-        "cash": 26026,
-        "holdings": 5
-      },
-      {
-        "name": "🦞 小龙虾",
-        "value": 54448,
-        "cost": 55000,
-        "pnl": -552,
-        "pnlPercent": -1.00,
-        "cash": 39002,
-        "holdings": 3
-      }
-    ],
-    "topGainers": [
-      { "ticker": "CVNA", "change": 8.2, "price": 315.00 },
-      { "ticker": "QUBT", "change": 5.1, "price": 11.42 },
-      { "ticker": "IREN", "change": 3.8, "price": 67.84 }
-    ],
-    "topLosers": [
-      { "ticker": "UPXI", "change": -12.1, "price": 1.26 },
-      { "ticker": "ROLR", "change": -11.7, "price": 5.44 },
-      { "ticker": "SOUN", "change": -3.3, "price": 8.08 }
+      { "name": "🏦 大机构",   "value": 37481, "pnl": 6.18,  "holdings": 3, "cash": 13640 },
+      { "name": "⚡ 激进交易", "value": 56457, "pnl": 26.93, "holdings": 5, "cash": 26026 },
+      { "name": "🦞 蓝虾交易", "value": 56813, "pnl": -1.00, "holdings": 3, "cash": 39002 }
     ]
   },
   "cronTasks": [
-    { "name": "🌅 早间情报", "cron": "0 9 * * *", "time": "09:00", "status": "active", "lastRun": "2026-05-29 09:00", "nextRun": "2026-05-30 09:00", "cost": 0.024 },
-    { "name": "🔥 10点深度推送", "cron": "0 10 * * *", "time": "10:00", "status": "active", "lastRun": "2026-05-29 10:00", "nextRun": "2026-05-30 10:00", "cost": 0.022 },
-    { "name": "📊 持仓扫描", "cron": "0 10 * * *", "time": "10:00", "status": "active", "lastRun": "2026-05-29 10:00", "nextRun": "2026-05-30 10:00", "cost": 0.020 },
-    { "name": "📡 Alpha扫描", "cron": "0 11 * * *", "time": "11:00", "status": "active", "lastRun": "2026-05-29 11:00", "nextRun": "2026-05-30 11:00", "cost": 0.020 },
-    { "name": "🔥 14点深度推送", "cron": "0 14 * * *", "time": "14:00", "status": "active", "lastRun": "2026-05-29 14:00", "nextRun": "2026-05-30 14:00", "cost": 0.022 },
-    { "name": "🐦 傍晚情报", "cron": "0 17 * * *", "time": "17:00", "status": "active", "lastRun": "2026-05-29 17:00", "nextRun": "2026-05-30 17:00", "cost": 0.024 },
-    { "name": "🏦 持仓日报", "cron": "0 18 * * *", "time": "18:00", "status": "active", "lastRun": "2026-05-29 18:00", "nextRun": "2026-05-30 18:00", "cost": 0.044 },
-    { "name": "🔥 19点深度推送", "cron": "0 19 * * *", "time": "19:00", "status": "active", "lastRun": "2026-05-29 19:00", "nextRun": "2026-05-30 19:00", "cost": 0.022 },
-    { "name": "📖 学城日报", "cron": "47 22 * * *", "time": "22:47", "status": "active", "lastRun": "2026-05-29 22:47", "nextRun": "2026-05-30 22:47", "cost": 0.010 },
-    { "name": "💼 ClawWork", "cron": "0 8 * * *", "time": "08:00", "status": "error", "lastRun": "2026-05-29 08:00", "nextRun": "2026-05-30 08:00", "cost": 0.030, "error": "E2B沙箱404" },
-    { "name": "🔄 三账户策略扫描", "cron": "0 */6 * * *", "time": "每6h", "status": "active", "lastRun": "2026-05-29 16:00", "nextRun": "2026-05-29 22:00", "cost": 0.080 }
+    { "name": "🌅 早间情报",      "cron": "0 9 * * *",   "status": "active",  "lastRun": "09:00", "cost": 0.024 },
+    { "name": "🔥 10点深度推送",  "cron": "0 10 * * *",  "status": "active",  "lastRun": "10:00", "cost": 0.022 },
+    { "name": "📊 持仓扫描",      "cron": "0 10 * * *",  "status": "active",  "lastRun": "10:00", "cost": 0.020 },
+    { "name": "💼 ClawWork",      "cron": "0 8 * * *",   "status": "error",   "lastRun": "08:00", "cost": 0.030, "error": "E2B 404" },
+    { "name": "🔄 策略扫描",      "cron": "0 */6 * * *", "status": "active",  "lastRun": "16:00", "cost": 0.080 },
+    { "name": "📖 学城日报",      "cron": "47 23 * * *", "status": "pending","lastRun": "--",    "cost": 0.010 }
   ],
   "watchlist": [
-    { "ticker": "UPXI", "price": 1.26, "trigger": 0.75, "type": "stop_loss", "distance": 40.5, "direction": "🔴 跌破" },
-    { "ticker": "ROLR", "price": 5.44, "trigger": 3.20, "type": "stop_loss", "distance": 41.2, "direction": "🔴 跌破" },
-    { "ticker": "CVNA", "price": 315.00, "trigger": 350.00, "type": "take_profit", "distance": 11.1, "direction": "🟢 突破" },
-    { "ticker": "HBAN", "price": 16.03, "trigger": 19.00, "type": "take_profit", "distance": 18.5, "direction": "🟢 突破" },
-    { "ticker": "SOFI", "price": 16.17, "trigger": 22.00, "type": "take_profit", "distance": 36.1, "direction": "🟢 突破" },
-    { "ticker": "QUBT", "price": 11.42, "trigger": 15.00, "type": "take_profit", "distance": 31.3, "direction": "🟢 突破" }
+    { "ticker": "UPXI", "price": 1.26,  "trigger": 0.75,  "type": "stop_loss",  "distance": -40.5 },
+    { "ticker": "ROLR", "price": 5.44,  "trigger": 3.20,  "type": "stop_loss",  "distance": -41.2 },
+    { "ticker": "CVNA", "price": 315.00, "trigger": 350.00, "type": "take_profit", "distance": 11.1 },
+    { "ticker": "SOFI", "price": 15.29, "trigger": 16.00, "type": "trigger",   "distance": -4.5 }
   ],
   "memories": [
-    { "date": "2026-05-29", "summary": "学城日报已生成，持仓扫描完成，总资产$148,386(-1.08%)", "keyEvents": ["三账户数据联动修复", "Dashboard Tab叠层修复回CSS radio方案"], "important": true },
-    { "date": "2026-05-28", "summary": "AISA余额耗尽，切换至免费数据源(Yahoo Finance/SEC EDGAR)", "keyEvents": ["API替换完成", "零成本数据管线建立"], "important": true },
-    { "date": "2026-05-27", "summary": "UPXI/ROLR接近止损位，密切监控中", "keyEvents": ["止损预警机制激活", "加仓条件待触发"], "important": false },
-    { "date": "2026-05-26", "summary": "三账户策略扫描上线，每6小时自动运行", "keyEvents": ["新Cron任务部署", "同步脚本自动化"], "important": false }
+    { "time": "2026-05-29 09:00", "title": "早间情报推送完成",      "summary": "Claude Code Channels · Graph Memory · Replit $4亿 · MCP 漏洞 ×3" },
+    { "time": "2026-05-29 10:30", "title": "深度推送 — Sapiom/CZ", "summary": "Sapiom $1500万融资 · CZ 加密支付宣言 · OpenClaw 3.2 Bug" },
+    { "time": "2026-05-29 14:00", "title": "深度推送 — OpenAI三合一", "summary": "OpenAI 统一App · Meta 内容审核 Agent · 三星 $730亿 AI芯片" },
+    { "time": "2026-05-29 16:05", "title": "三账户持仓扫描",        "summary": "总 $147,724 (-1.52%) · CVNA +8.2% · UPXI ⚠️ -12.1%" },
+    { "time": "2026-05-29 19:00", "title": "晚间深度推送",          "summary": "Morgan Stanley MSBT ETF · ORCL Q3 +9.2% · 美股蒸发 $8200亿" }
   ],
-  "apiStatus": [
-    { "name": "AISA LLM", "status": "error", "baseUrl": "api.aisa.one/v1", "balance": -0.003, "lastCheck": "2026-05-29 22:00", "note": "余额耗尽" },
-    { "name": "AISA Twitter", "status": "error", "baseUrl": "api.aisa.one/apis/v1/twitter", "balance": -0.003, "lastCheck": "2026-05-29 22:00", "note": "余额不足" },
-    { "name": "AISA Search", "status": "error", "baseUrl": "api.aisa.one/apis/v1/scholar", "balance": -0.003, "lastCheck": "2026-05-29 22:00", "note": "余额不足" },
-    { "name": "Tavily", "status": "ok", "baseUrl": "api.tavily.com/v1", "balance": "免费额度", "lastCheck": "2026-05-29 22:00", "note": "可用" },
-    { "name": "SEC EDGAR", "status": "ok", "baseUrl": "efts.sec.gov", "balance": "免费", "lastCheck": "2026-05-29 22:00", "note": "可用" },
-    { "name": "Yahoo Finance", "status": "ok", "baseUrl": "query1.finance.yahoo.com", "balance": "免费", "lastCheck": "2026-05-29 22:00", "note": "可用" },
-    { "name": "智谱 GLM", "status": "ok", "baseUrl": "open.bigmodel.cn", "balance": "独立计费", "lastCheck": "2026-05-29 22:00", "note": "可用" }
+  "apis": [
+    { "icon": "🤖", "name": "AISA LLM",     "status": "limited",     "latency": 320, "note": "余额 -$0.003" },
+    { "icon": "🐦", "name": "AISA Twitter",  "status": "unavailable", "latency": null, "note": "余额耗尽" },
+    { "icon": "🔍", "name": "Tavily",         "status": "available",  "latency": 180, "note": "免费额度内" },
+    { "icon": "🏛️", "name": "SEC EDGAR",     "status": "available",  "latency": 420, "note": "零成本" },
+    { "icon": "📊", "name": "Yahoo Finance",  "status": "available",  "latency": 95,  "note": "实时行情" },
+    { "icon": "💼", "name": "ClawWork",       "status": "available",  "latency": 60,  "note": "余额 $290" },
+    { "icon": "🔬", "name": "E2B Sandbox",    "status": "unavailable", "latency": null, "note": "模板 404" }
   ]
 }

@@ -30,7 +30,28 @@
 <div class="status-bar">
   <span>🟢 ONLINE</span>
   <span>🕐 <span id="clock"></span></span>
-  <span class="dim">更新: <span id="updateTime">--</span></span>
+  <span class="dim">更新: <span id="updateTime">2026/5/29 15:27:20</span></span>
+</div>
+
+<!-- ========== 顶部数据 ========== -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:12px;">
+  <!-- STATS_START -->
+  <div class="stat-card">
+    <div class="value blue">$148,386</div>
+    <div class="label">💰 总资产</div>
+  </div>
+  <div class="stat-card">
+    <div class="value red">-1.08%</div>
+    <div class="label">📈 总盈亏</div>
+  </div>
+  <div class="stat-card">
+    <div class="value" style="color:var(--green)">4/6</div>
+    <div class="label">✅ 任务正常</div>
+  </div>
+  <div class="stat-card">
+    <div class="value yellow">4</div>
+    <div class="label">🔍 预警信号</div>
+  </div><!-- STATS_END -->
 </div>
 
 <!-- ========== 1. 持仓概览 ========== -->
@@ -42,7 +63,7 @@
     <tr><td>🏦 大机构</td><td>$37,481</td><td class="green">+6.18%</td><td>3 只</td><td class="dim">$13,640</td></tr>
     <tr><td>⚡ 激进交易</td><td>$56,457</td><td class="green">+26.93%</td><td>5 只</td><td class="dim">$26,026</td></tr>
     <tr><td>🦞 蓝虾交易</td><td>$56,813</td><td class="red">-1.00%</td><td>3 只</td><td class="dim">$39,002</td></tr>
-    <!-- POSITIONS_END -->
+<!-- POSITIONS_END -->
   </table>
 </div>
 
@@ -53,12 +74,12 @@
     <tr><th>任务</th><th>Cron</th><th>状态</th><th>最近运行</th><th>成本</th></tr>
     <!-- CRON_START -->
     <tr><td>🌅 早间情报</td><td class="mono dim">0 9 * * *</td><td><span class="tag active">活跃</span></td><td class="dim">09:00</td><td class="dim">$0.024</td></tr>
-    <tr><td>🔥 深度推送</td><td class="mono dim">0 10 * * *</td><td><span class="tag active">活跃</span></td><td class="dim">10:00</td><td class="dim">$0.022</td></tr>
+    <tr><td>🔥 10点深度推送</td><td class="mono dim">0 10 * * *</td><td><span class="tag active">活跃</span></td><td class="dim">10:00</td><td class="dim">$0.022</td></tr>
     <tr><td>📊 持仓扫描</td><td class="mono dim">0 10 * * *</td><td><span class="tag active">活跃</span></td><td class="dim">10:00</td><td class="dim">$0.020</td></tr>
     <tr><td>💼 ClawWork</td><td class="mono dim">0 8 * * *</td><td><span class="tag error">E2B 404</span></td><td class="dim">08:00</td><td class="dim">$0.030</td></tr>
-    <tr><td>🔄 策略扫描</td><td class="mono dim">0 */6 * * *</td><td><span class="tag active">活跃×4</span></td><td class="dim">16:00</td><td class="dim">$0.080</td></tr>
+    <tr><td>🔄 策略扫描</td><td class="mono dim">0 */6 * * *</td><td><span class="tag active">活跃</span></td><td class="dim">16:00</td><td class="dim">$0.080</td></tr>
     <tr><td>📖 学城日报</td><td class="mono dim">47 23 * * *</td><td><span class="tag pending">待执行</span></td><td class="dim">--</td><td class="dim">$0.010</td></tr>
-    <!-- CRON_END -->
+<!-- CRON_END -->
   </table>
 </div>
 
@@ -71,8 +92,8 @@
     <tr><td class="mono">🔴 UPXI</td><td class="mono">$1.26</td><td class="mono dim">$0.75</td><td>止损</td><td class="red">-40.5%</td></tr>
     <tr><td class="mono">🔴 ROLR</td><td class="mono">$5.44</td><td class="mono dim">$3.20</td><td>止损</td><td class="red">-41.2%</td></tr>
     <tr><td class="mono">🟢 CVNA</td><td class="mono">$315.00</td><td class="mono dim">$350.00</td><td>止盈</td><td class="green">+11.1%</td></tr>
-    <tr><td class="mono">🔴 SOFI</td><td class="mono">$15.29</td><td class="mono dim">$16.00</td><td>建仓</td><td class="red">-4.5%</td></tr>
-    <!-- WATCHLIST_END -->
+    <tr><td class="mono">🔴 SOFI</td><td class="mono">$15.29</td><td class="mono dim">$16.00</td><td>触发</td><td class="red">-4.5%</td></tr>
+<!-- WATCHLIST_END -->
   </table>
 </div>
 
@@ -83,29 +104,29 @@
   <div class="memory-item">
     <div class="time">2026-05-29 09:00</div>
     <div class="title">早间情报推送完成</div>
-    <div class="dim">Claude Code Channels · Graph Memory · Replit $4亿 · MCP 漏洞 ×3</div>
+    <div class="summary">Claude Code Channels · Graph Memory · Replit $4亿 · MCP 漏洞 ×3</div>
   </div>
   <div class="memory-item">
     <div class="time">2026-05-29 10:30</div>
     <div class="title">深度推送 — Sapiom/CZ</div>
-    <div class="dim">Sapiom $1500万融资 · CZ 加密支付宣言 · OpenClaw 3.2 Bug</div>
+    <div class="summary">Sapiom $1500万融资 · CZ 加密支付宣言 · OpenClaw 3.2 Bug</div>
   </div>
   <div class="memory-item">
     <div class="time">2026-05-29 14:00</div>
     <div class="title">深度推送 — OpenAI三合一</div>
-    <div class="dim">OpenAI 统一App · Meta 内容审核 Agent · 三星 $730亿 AI芯片</div>
+    <div class="summary">OpenAI 统一App · Meta 内容审核 Agent · 三星 $730亿 AI芯片</div>
   </div>
   <div class="memory-item">
     <div class="time">2026-05-29 16:05</div>
     <div class="title">三账户持仓扫描</div>
-    <div class="dim">总 $147,724 (-1.52%) · CVNA +8.2% · UPXI ⚠️ -12.1%</div>
+    <div class="summary">总 $147,724 (-1.52%) · CVNA +8.2% · UPXI ⚠️ -12.1%</div>
   </div>
   <div class="memory-item">
     <div class="time">2026-05-29 19:00</div>
     <div class="title">晚间深度推送</div>
-    <div class="dim">Morgan Stanley MSBT ETF · ORCL Q3 +9.2% · 美股蒸发 $8200亿</div>
+    <div class="summary">Morgan Stanley MSBT ETF · ORCL Q3 +9.2% · 美股蒸发 $8200亿</div>
   </div>
-  <!-- MEMORY_END -->
+<!-- MEMORY_END -->
 </div>
 
 <!-- ========== 5. API 状态 ========== -->
@@ -114,14 +135,14 @@
   <table>
     <tr><th>API</th><th>状态</th><th>延迟</th><th>备注</th></tr>
     <!-- API_START -->
-    <tr><td>🤖 AISA LLM</td><td><span class="tag pending">余额不足</span></td><td class="mono dim">320ms</td><td class="dim">余额 -$0.003</td></tr>
-    <tr><td>🐦 AISA Twitter</td><td><span class="tag error">不可用</span></td><td class="mono dim">--</td><td class="dim red">余额耗尽</td></tr>
+    <tr><td>🤖 AISA LLM</td><td><span class="tag pending">余额 -$0.003</span></td><td class="mono dim">320ms</td><td class="dim">余额 -$0.003</td></tr>
+    <tr><td>🐦 AISA Twitter</td><td><span class="tag error">不可用</span></td><td class="mono dim">--</td><td class="dim">余额耗尽</td></tr>
     <tr><td>🔍 Tavily</td><td><span class="tag active">可用</span></td><td class="mono dim">180ms</td><td class="dim">免费额度内</td></tr>
     <tr><td>🏛️ SEC EDGAR</td><td><span class="tag active">可用</span></td><td class="mono dim">420ms</td><td class="dim">零成本</td></tr>
     <tr><td>📊 Yahoo Finance</td><td><span class="tag active">可用</span></td><td class="mono dim">95ms</td><td class="dim">实时行情</td></tr>
     <tr><td>💼 ClawWork</td><td><span class="tag active">可用</span></td><td class="mono dim">60ms</td><td class="dim">余额 $290</td></tr>
-    <tr><td>🔬 E2B Sandbox</td><td><span class="tag error">不可用</span></td><td class="mono dim">--</td><td class="dim red">模板 404</td></tr>
-    <!-- API_END -->
+    <tr><td>🔬 E2B Sandbox</td><td><span class="tag error">不可用</span></td><td class="mono dim">--</td><td class="dim">模板 404</td></tr>
+<!-- API_END -->
   </table>
 </div>
 

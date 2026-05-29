@@ -7,8 +7,8 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 cd "$SCRIPT_DIR" || exit 1
 
-echo "📝 更新数据..."
-node update_dashboard.js 2>/dev/null
+echo "📝 从 data.json 更新 HTML..."
+node update_dashboard.js --data data.json 2>/dev/null
 
 echo "📤 推送到 GitHub..."
 git add -A
