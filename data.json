@@ -1,90 +1,41 @@
 {
-  "system": {
-    "name": "🦞 小龙虾",
-    "status": "ONLINE",
-    "version": "v2.1.0",
-    "lastUpdate": "2026-05-29 22:00:00",
-    "uptime": "12d 7h 23m"
-  },
   "portfolio": {
-    "totalValue": 148386,
-    "totalCost": 150000,
-    "totalPnl": -1614,
-    "totalPnlPercent": -1.08,
+    "total": 3.72,
+    "totalPnl": 128.5,
     "accounts": [
-      {
-        "name": "🏦 大机构",
-        "value": 37481,
-        "cost": 40000,
-        "pnl": -2519,
-        "pnlPercent": -6.30,
-        "cash": 13640,
-        "holdings": 3
-      },
-      {
-        "name": "⚡ 激进交易",
-        "value": 56457,
-        "cost": 55000,
-        "pnl": 1457,
-        "pnlPercent": 2.65,
-        "cash": 26026,
-        "holdings": 5
-      },
-      {
-        "name": "🦞 小龙虾",
-        "value": 54448,
-        "cost": 55000,
-        "pnl": -552,
-        "pnlPercent": -1.00,
-        "cash": 39002,
-        "holdings": 3
-      }
-    ],
-    "topGainers": [
-      { "ticker": "CVNA", "change": 8.2, "price": 315.00 },
-      { "ticker": "QUBT", "change": 5.1, "price": 11.42 },
-      { "ticker": "IREN", "change": 3.8, "price": 67.84 }
-    ],
-    "topLosers": [
-      { "ticker": "UPXI", "change": -12.1, "price": 1.26 },
-      { "ticker": "ROLR", "change": -11.7, "price": 5.44 },
-      { "ticker": "SOUN", "change": -3.3, "price": 8.08 }
+      { "name": "📘 模电",   "value": 88, "pnl": 4.5,  "holdings": 48, "cash": 3 },
+      { "name": "🔌 数电", "value": 92, "pnl": 7.2, "holdings": 44, "cash": 2 },
+      { "name": "💻 嵌入式", "value": 85, "pnl": -2.0, "holdings": 52, "cash": 4 }
     ]
   },
   "cronTasks": [
-    { "name": "🌅 早间情报", "cron": "0 9 * * *", "time": "09:00", "status": "active", "lastRun": "2026-05-29 09:00", "nextRun": "2026-05-30 09:00", "cost": 0.024 },
-    { "name": "🔥 10点深度推送", "cron": "0 10 * * *", "time": "10:00", "status": "active", "lastRun": "2026-05-29 10:00", "nextRun": "2026-05-30 10:00", "cost": 0.022 },
-    { "name": "📊 持仓扫描", "cron": "0 10 * * *", "time": "10:00", "status": "active", "lastRun": "2026-05-29 10:00", "nextRun": "2026-05-30 10:00", "cost": 0.020 },
-    { "name": "📡 Alpha扫描", "cron": "0 11 * * *", "time": "11:00", "status": "active", "lastRun": "2026-05-29 11:00", "nextRun": "2026-05-30 11:00", "cost": 0.020 },
-    { "name": "🔥 14点深度推送", "cron": "0 14 * * *", "time": "14:00", "status": "active", "lastRun": "2026-05-29 14:00", "nextRun": "2026-05-30 14:00", "cost": 0.022 },
-    { "name": "🐦 傍晚情报", "cron": "0 17 * * *", "time": "17:00", "status": "active", "lastRun": "2026-05-29 17:00", "nextRun": "2026-05-30 17:00", "cost": 0.024 },
-    { "name": "🏦 持仓日报", "cron": "0 18 * * *", "time": "18:00", "status": "active", "lastRun": "2026-05-29 18:00", "nextRun": "2026-05-30 18:00", "cost": 0.044 },
-    { "name": "🔥 19点深度推送", "cron": "0 19 * * *", "time": "19:00", "status": "active", "lastRun": "2026-05-29 19:00", "nextRun": "2026-05-30 19:00", "cost": 0.022 },
-    { "name": "📖 学城日报", "cron": "47 22 * * *", "time": "22:47", "status": "active", "lastRun": "2026-05-29 22:47", "nextRun": "2026-05-30 22:47", "cost": 0.010 },
-    { "name": "💼 ClawWork", "cron": "0 8 * * *", "time": "08:00", "status": "error", "lastRun": "2026-05-29 08:00", "nextRun": "2026-05-30 08:00", "cost": 0.030, "error": "E2B沙箱404" },
-    { "name": "🔄 三账户策略扫描", "cron": "0 */6 * * *", "time": "每6h", "status": "active", "lastRun": "2026-05-29 16:00", "nextRun": "2026-05-29 22:00", "cost": 0.080 }
+    { "name": "🔬 模电实验报告",      "cron": "第12周",   "status": "active",  "lastRun": "已完成", "cost": "A" },
+    { "name": "📟 数电期末项目",  "cron": "第16周",  "status": "active",  "lastRun": "进度60%", "cost": "B+" },
+    { "name": "🤖 智能车竞赛",      "cron": "6月",  "status": "active",  "lastRun": "调PID中", "cost": "—" },
+    { "name": "📡 信号处理实验",      "cron": "第13周",   "status": "error",   "lastRun": "FFT报错", "cost": "待调试", "error": "Matlab崩溃" },
+    { "name": "⚡ 电路分析作业",      "cron": "每周三", "status": "active",  "lastRun": "已提交", "cost": "A-" },
+    { "name": "📝 英语六级",      "cron": "6月15日", "status": "pending","lastRun": "倒计时18天", "cost": "冲刺中" }
   ],
   "watchlist": [
-    { "ticker": "UPXI", "price": 1.26, "trigger": 0.75, "type": "stop_loss", "distance": 40.5, "direction": "🔴 跌破" },
-    { "ticker": "ROLR", "price": 5.44, "trigger": 3.20, "type": "stop_loss", "distance": 41.2, "direction": "🔴 跌破" },
-    { "ticker": "CVNA", "price": 315.00, "trigger": 350.00, "type": "take_profit", "distance": 11.1, "direction": "🟢 突破" },
-    { "ticker": "HBAN", "price": 16.03, "trigger": 19.00, "type": "take_profit", "distance": 18.5, "direction": "🟢 突破" },
-    { "ticker": "SOFI", "price": 16.17, "trigger": 22.00, "type": "take_profit", "distance": 36.1, "direction": "🟢 突破" },
-    { "ticker": "QUBT", "price": 11.42, "trigger": 15.00, "type": "take_profit", "distance": 31.3, "direction": "🟢 突破" }
+    { "ticker": "🏆 电赛", "price": 6.15,  "trigger": 6.10,  "type": "deadline",  "distance": -5.2 },
+    { "ticker": "📖 六级", "price": 6.15,  "trigger": 6.10,  "type": "deadline",  "distance": -18.3 },
+    { "ticker": "🎯 考研", "price": 12.21, "trigger": 12.20, "type": "deadline", "distance": 201.0 },
+    { "ticker": "💼 实习投递", "price": 5.30, "trigger": 5.15, "type": "deadline", "distance": -15.0 }
   ],
   "memories": [
-    { "date": "2026-05-29", "summary": "学城日报已生成，持仓扫描完成，总资产$148,386(-1.08%)", "keyEvents": ["三账户数据联动修复", "Dashboard Tab叠层修复回CSS radio方案"], "important": true },
-    { "date": "2026-05-28", "summary": "AISA余额耗尽，切换至免费数据源(Yahoo Finance/SEC EDGAR)", "keyEvents": ["API替换完成", "零成本数据管线建立"], "important": true },
-    { "date": "2026-05-27", "summary": "UPXI/ROLR接近止损位，密切监控中", "keyEvents": ["止损预警机制激活", "加仓条件待触发"], "important": false },
-    { "date": "2026-05-26", "summary": "三账户策略扫描上线，每6小时自动运行", "keyEvents": ["新Cron任务部署", "同步脚本自动化"], "important": false }
+    { "time": "2026-05-28", "title": "🔬 模电实验：负反馈放大电路",      "summary": "电压增益 46dB，通频带 20Hz~200kHz，与理论值误差 <3%" },
+    { "time": "2026-05-26", "title": "📟 数电：时序逻辑电路设计", "summary": "用 74LS161 实现了 12 进制计数器，仿真通过" },
+    { "time": "2026-05-24", "title": "🤖 智能车：PID 参数整定", "summary": "P=0.8, I=0.02, D=0.1，循迹稳定，弯道速度 1.2m/s" },
+    { "time": "2026-05-22", "title": "📡 信号处理：FFT 频谱分析",        "summary": "1kHz+3kHz 混叠信号分离成功，频谱分辨率 1Hz" },
+    { "time": "2026-05-20", "title": "⚡ 电路分析：RLC 谐振电路",          "summary": "谐振频率 f₀=1.59kHz，Q=32，3dB带宽 50Hz" }
   ],
-  "apiStatus": [
-    { "name": "AISA LLM", "status": "error", "baseUrl": "api.aisa.one/v1", "balance": -0.003, "lastCheck": "2026-05-29 22:00", "note": "余额耗尽" },
-    { "name": "AISA Twitter", "status": "error", "baseUrl": "api.aisa.one/apis/v1/twitter", "balance": -0.003, "lastCheck": "2026-05-29 22:00", "note": "余额不足" },
-    { "name": "AISA Search", "status": "error", "baseUrl": "api.aisa.one/apis/v1/scholar", "balance": -0.003, "lastCheck": "2026-05-29 22:00", "note": "余额不足" },
-    { "name": "Tavily", "status": "ok", "baseUrl": "api.tavily.com/v1", "balance": "免费额度", "lastCheck": "2026-05-29 22:00", "note": "可用" },
-    { "name": "SEC EDGAR", "status": "ok", "baseUrl": "efts.sec.gov", "balance": "免费", "lastCheck": "2026-05-29 22:00", "note": "可用" },
-    { "name": "Yahoo Finance", "status": "ok", "baseUrl": "query1.finance.yahoo.com", "balance": "免费", "lastCheck": "2026-05-29 22:00", "note": "可用" },
-    { "name": "智谱 GLM", "status": "ok", "baseUrl": "open.bigmodel.cn", "balance": "独立计费", "lastCheck": "2026-05-29 22:00", "note": "可用" }
+  "apis": [
+    { "icon": "💻", "name": "MATLAB",     "status": "available",  "latency": "激活", "note": "R2024a" },
+    { "icon": "🔧", "name": "Keil MDK",  "status": "available", "latency": "v5.38", "note": "STM32F1" },
+    { "icon": "📐", "name": "Altium Designer", "status": "available",  "latency": "v22", "note": "学生授权" },
+    { "icon": "🧩", "name": "Vivado",     "status": "limited",  "latency": "v2023.2", "note": "需更新许可证" },
+    { "icon": "🐍", "name": "Python",  "status": "available",  "latency": "3.11", "note": "NumPy/SciPy" },
+    { "icon": "⚡", "name": "STM32CubeMX",  "status": "available",  "latency": "v6.9", "note": "HAL库" },
+    { "icon": "📟", "name": "Multisim",    "status": "unavailable", "latency": "—", "note": "需重新安装" }
   ]
 }
