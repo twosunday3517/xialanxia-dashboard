@@ -118,7 +118,7 @@ tr:last-child td{border-bottom:none}
     <div class="status">
       <span><span class="dot"></span> 学习中</span>
       <span class="clock" id="clock">--:--:--</span>
-      <span class="dim" style="font-size:11px">更新: <span id="updateTime">--</span></span>
+      <span class="dim" style="font-size:11px">更新: <span id="updateTime">2026/5/29 17:19:40</span></span>
     </div>
   </div>
 
@@ -147,26 +147,39 @@ tr:last-child td{border-bottom:none}
   <div id="page-log">
     <div id="logContainer">
     <!-- LOGS_START -->
-    <div class="log-day">
-      <div class="date">📅 2026-06-02</div>
-      <div class="log-row"><span class="t">08:00</span><span>🤖 Claude 辅助写电赛电源方案代码，PID 参数自动整定 <span class="tag green">AI工具</span></span></div>
-      <div class="log-row"><span class="t">08:30</span><span>📄 LLC 谐振变换器论文精读，整理控制流程图 <span class="tag green">论文</span></span></div>
-      <div class="log-row"><span class="t">10:00</span><span>🌐 英飞凌 CoolMOS 数据手册查阅，对比 GaN 与 SiC <span class="tag green">网站</span></span></div>
-      <div class="log-row"><span class="t">13:00</span><span>🔧 SimpleSMPS 焊接 UC3843 控制板，调反馈回路 <span class="tag green">开源</span></span></div>
-      <div class="log-row"><span class="t">15:30</span><span>🏆 电赛电源组训练：Boost 变换器计算与仿真 <span class="tag green">比赛</span></span></div>
-      <div class="log-row"><span class="t">19:00</span><span>📊 开关电源设计：变压器绕组设计，完成作业 <span class="tag green">学业</span></span></div>
-      <div class="log-row"><span class="t">20:30</span><span>🤖 VS Code + Copilot 写 STM32 数字电源控制代码 <span class="tag green">AI工具</span></span></div>
-      <div class="log-row"><span class="t">21:00</span><span>📤 Dashboard 数据更新 <span class="tag green">系统</span></span></div>
-    </div>
-    <div class="log-day">
-      <div class="date">📅 2026-06-01</div>
-      <div class="log-row"><span class="t">09:00</span><span>🤖 DeepSeek 辅助设计 Buck 补偿网络，Type III 参数 <span class="tag green">AI工具</span></span></div>
-      <div class="log-row"><span class="t">09:30</span><span>🌐 TI Webench 设计 48V→12V 电源方案 <span class="tag green">网站</span></span></div>
-      <div class="log-row"><span class="t">11:00</span><span>🔧 复刻 OpenDCDC 项目，下载原理图 <span class="tag green">开源</span></span></div>
-      <div class="log-row"><span class="t">14:30</span><span>📄 阅读 GaN DC-DC 论文，笔记已整理 <span class="tag green">论文</span></span></div>
-      <div class="log-row"><span class="t">16:00</span><span>🏆 电赛电源组报名准备，Buck/Boost 仿真 <span class="tag green">比赛</span></span></div>
-    </div>
-    <!-- LOGS_END -->
+  <div class="log-day">
+    <div class="day-head">📅 2026-06-02</div>
+    <div class="log-row"><span class="ltime">08:00</span><span class="ltext">🤖 用 Claude 辅助写电赛电源方案代码，PID 参数自动整定 <span class="tag active" style="font-size:10px;">AI工具</span></span></div>
+      <div class="log-row"><span class="ltime">08:30</span><span class="ltext">📄 数字控制 LLC 谐振变换器论文精读，整理了控制流程图 <span class="tag active" style="font-size:10px;">论文</span></span></div>
+      <div class="log-row"><span class="ltime">08:30</span><span class="ltext">📄 数字控制 LLC 谐振变换器论文精读，整理了控制流程图 <span class="tag active" style="font-size:10px;">论文</span></span></div>
+      <div class="log-row"><span class="ltime">10:00</span><span class="ltext">🌐 英飞凌 CoolMOS 数据手册查阅，对比 GaN 与 SiC 参数 <span class="tag active" style="font-size:10px;">网站</span></span></div>
+      <div class="log-row"><span class="ltime">13:00</span><span class="ltext">🔧 SimpleSMPS 项目复刻：焊接 UC3843 控制板，调试反馈回路 <span class="tag active" style="font-size:10px;">开源</span></span></div>
+      <div class="log-row"><span class="ltime">15:30</span><span class="ltext">🏆 全国电赛电源组专题训练：Boost 变换器计算与仿真 <span class="tag active" style="font-size:10px;">比赛</span></span></div>
+      <div class="log-row"><span class="ltime">19:00</span><span class="ltext">📊 开关电源设计课程：变压器绕组设计，完成作业提交 <span class="tag active" style="font-size:10px;">学业</span></span></div>
+      <div class="log-row"><span class="ltime">20:30</span><span class="ltext">🤖 VS Code + Copilot 写 STM32 数字电源控制代码，AI 自动生成 PWM 配置 <span class="tag active" style="font-size:10px;">AI工具</span></span></div>
+      <div class="log-row"><span class="ltime">21:00</span><span class="ltext">📤 Dashboard 数据更新 <span class="tag active" style="font-size:10px;">系统</span></span></div>
+  </div>
+  <div class="log-day">
+    <div class="day-head">📅 2026-06-01</div>
+    <div class="log-row"><span class="ltime">09:00</span><span class="ltext">🤖 DeepSeek 辅助设计 Buck 变换器补偿网络，得到 Type III 参数 <span class="tag active" style="font-size:10px;">AI工具</span></span></div>
+      <div class="log-row"><span class="ltime">09:30</span><span class="ltext">🌐 浏览 TI Webench，设计 48V→12V 电源方案 <span class="tag active" style="font-size:10px;">网站</span></span></div>
+      <div class="log-row"><span class="ltime">11:00</span><span class="ltext">🔧 复刻 OpenDCDC 项目，下载原理图 <span class="tag active" style="font-size:10px;">开源</span></span></div>
+      <div class="log-row"><span class="ltime">14:30</span><span class="ltext">📄 阅读 GaN DC-DC 论文，笔记已整理 <span class="tag active" style="font-size:10px;">论文</span></span></div>
+      <div class="log-row"><span class="ltime">16:00</span><span class="ltext">🏆 电赛电源组报名准备，Buck/Boost 仿真 <span class="tag active" style="font-size:10px;">比赛</span></span></div>
+  </div>
+  <div class="log-day">
+    <div class="day-head">📅 2026-05-31</div>
+    <div class="log-row"><span class="ltime">10:00</span><span class="ltext">📊 电力电子技术复习：BUCK 变换器原理 <span class="tag active" style="font-size:10px;">学业</span></span></div>
+      <div class="log-row"><span class="ltime">15:00</span><span class="ltext">🌐 电源网浏览 LLC 谐振变换器文章 <span class="tag active" style="font-size:10px;">网站</span></span></div>
+      <div class="log-row"><span class="ltime">20:00</span><span class="ltext">📄 PFC 整流器论文阅读，仿真模型搭建 <span class="tag active" style="font-size:10px;">论文</span></span></div>
+  </div>
+  <div class="log-day">
+    <div class="day-head">📅 2026-05-30</div>
+    <div class="log-row"><span class="ltime">09:00</span><span class="ltext">🔧 SimpleSMPS 项目分析，UC3843 电路学习 <span class="tag active" style="font-size:10px;">开源</span></span></div>
+      <div class="log-row"><span class="ltime">14:00</span><span class="ltext">🏆 TI杯电源设计赛规则解读 <span class="tag active" style="font-size:10px;">比赛</span></span></div>
+      <div class="log-row"><span class="ltime">19:00</span><span class="ltext">📊 自动控制原理：PID 参数整定实验 <span class="tag active" style="font-size:10px;">学业</span></span></div>
+  </div>
+<!-- LOGS_END -->
     </div>
   </div>
 
